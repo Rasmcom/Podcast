@@ -371,11 +371,14 @@
                     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
                     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
                     <style>
+                        /* **FIX**: Force printing of background colors and images in browsers like Chrome/Edge */
+                        * {
+                           -webkit-print-color-adjust: exact !important;
+                           color-adjust: exact !important;
+                        }
                         body { 
                             font-family: 'Cairo', sans-serif; 
                             direction: rtl; 
-                            -webkit-print-color-adjust: exact !important; 
-                            color-adjust: exact !important; 
                             margin: 0;
                         }
                         @page { 
@@ -566,4 +569,4 @@
         });
     </script>
 </body>
-</ht
+</html>
