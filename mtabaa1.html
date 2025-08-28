@@ -21,6 +21,16 @@
                 display: none;
             }
         }
+        .custom-select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: left 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -58,7 +68,7 @@
             <div class="flex items-end gap-2 mb-6">
                 <div class="flex-grow">
                     <label for="week-selector" class="block text-sm font-medium text-gray-700">اختر الأسبوع:</label>
-                    <select id="week-selector" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    <select id="week-selector" class="custom-select mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 bg-gray-50 border-2">
                         <option value="">الرجاء اختيار أسبوع</option>
                     </select>
                 </div>
@@ -82,13 +92,18 @@
 
         <footer class="mt-6 rounded-lg shadow-md bg-white">
             <div class="h-10 bg-gradient-to-l from-green-500 via-teal-500 to-blue-500 rounded-t-lg" style="--tw-gradient-from: #34ad82; --tw-gradient-to: #2490ac;"></div>
-            <div class="p-4 flex justify-between items-center">
-                <div class="flex items-center gap-4">
-                    <img src="https://j.top4top.io/p_3516qltr40.png" alt="شعار الوزارة" class="h-16 opacity-0">
+            <div class="p-4 flex flex-col items-center gap-6">
+                <!-- Signatures -->
+                <div class="flex w-full justify-around">
+                     <input type="text" id="supervisor-name" placeholder="اسم مشرف الإذاعة" class="text-center block w-48 bg-transparent border-b border-gray-300 focus:outline-none focus:border-blue-500">
+                     <input type="text" id="manager-name" placeholder="اسم مدير المدرسة" class="text-center block w-48 bg-transparent border-b border-gray-300 focus:outline-none focus:border-blue-500">
                 </div>
-                <div class="flex gap-8">
-                    <input type="text" id="supervisor-name" placeholder="اسم مشرف الإذاعة" class="text-center block w-48 bg-transparent border-b border-gray-300 focus:outline-none focus:border-blue-500">
-                    <input type="text" id="manager-name" placeholder="اسم مدير المدرسة" class="text-center block w-48 bg-transparent border-b border-gray-300 focus:outline-none focus:border-blue-500">
+                 <!-- Copyright -->
+                 <div class="flex items-center gap-4 text-gray-600 text-sm pt-4 border-t border-gray-200 w-full justify-center">
+                    <a href="https://www.rasmcom.com" target="_blank" rel="noopener noreferrer">
+                        <img src="https://e.top4top.io/p_3463x5tj40.png" alt="شعار رسم" class="h-12 w-auto" onerror="this.onerror=null;this.style.display='none'">
+                    </a>
+                    <span>جميع الحقوق محفوظة لرسم للتصميم والخدمات التعليمية 2025</span>
                 </div>
             </div>
         </footer>
@@ -223,7 +238,6 @@
                     { value: 'week15', text: 'الأسبوع الخامس عشر', dates: ['٢٣ / ٦', '٢٤ / ٦', '٢٥ / ٦', '٢٦ / ٦', '٢٧ / ٦'] },
                     { value: 'week16', text: 'الأسبوع السادس عشر', dates: ['١ / ٧', '٢ / ٧', '٣ / ٧', '٤ / ٧', '٥ / ٧'] },
                     { value: 'week17', text: 'الأسبوع السابع عشر', dates: ['٨ / ٧', '٩ / ٧', '١٠ / ٧', '١١ / ٧', '١٢ / ٧'] },
-                    // **FIX**: Removed week 18 for western region
                 ]
             };
 
@@ -552,4 +566,4 @@
         });
     </script>
 </body>
-</html>
+</ht
