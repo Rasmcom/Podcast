@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متابعة الإذاعة المدرسية</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f7fafc;
+        }
+        /* Styles for the main page, hidden during print */
+        @media print {
+            body > *:not(#print-view) {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Main Content -->
+    <div class="container mx-auto p-4" id="main-content">
+        <!-- Header -->
+        <header class="bg-white rounded-lg shadow-md">
+            <div style="background-color: #003a46;" class="p-4 text-white text-center rounded-t-lg">
+                <div class="flex justify-between items-center mb-4">
+                    <div></div> <!-- Spacer -->
+                    <h1 class="text-3xl font-bold">متابعة الإذاعة المدرسية</h1>
+                    <img src="https://j.top4top.io/p_3516qltr40.png" alt="شعار الوزارة" class="h-16" onerror="this.onerror=null;this.src='https://placehold.co/64x64/eee/ccc?text=Logo';">
+                </div>
+                <div class="flex justify-center gap-6">
+                    <input type="text" id="edu-admin" placeholder="ادخل اسم الإدارة التعليمية" class="w-1/3 bg-transparent border-b-2 border-gray-400 text-white text-center placeholder-gray-300 focus:outline-none focus:border-green-400 transition">
+                    <input type="text" id="school-name" placeholder="ادخل اسم المدرسة" class="w-1/3 bg-transparent border-b-2 border-gray-400 text-white text-center placeholder-gray-300 focus:outline-none focus:border-green-400 transition">
+                </div>
+            </div>
+            <div class="h-2 bg-gradient-to-l from-green-500 via-teal-500 to-blue-500" style="--tw-gradient-from: #34ad82; --tw-gradient-to: #2490ac;"></div>
+        </header>
+
+        <main class="bg-white p-6 rounded-lg shadow-md mt-6">
+            <!-- Controls -->
+            <div class="mb-4 flex justify-center gap-x-8 text-gray-700">
+                <label class="flex items-center cursor-pointer">
+                    <input type="radio" name="region" value="default" checked class="form-radio h-4 w-4 text-blue-600">
+                    <span class="mr-2">باقي المناطق</span>
+                </label>
+                <label class="flex items-center cursor-pointer">
+                    <input type="radio" name="region" value="western" class="form-radio h-4 w-4 text-blue-600">
+                    <span class="mr-2">المنطقة الغربية</span>
+                </label>
+            </div>
+            <div class="flex items-end gap-2 mb-6">
+                <div class="flex-grow">
+                    <label for="week-selector" class="block text-sm font-medium text-gray-700">اختر الأسبوع:</label>
+                    <select id="week-selector" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <option value="">الرجاء اختيار أسبوع</option>
+                    </select>
+                </div>
+                <div id="save-status" class="flex items-center gap-2 text-green-600 opacity-0 transition-opacity duration-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                    <span>تم الحفظ</span>
+                </div>
+                 <button id="clear-button" title="مسح البيانات المحفوظة" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition h-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v6a1 1 0 11-2 0V8z" clip-rule="evenodd" /></svg>
+                </button>
+                <button id="print-button" title="طباعة" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition h-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 4v3H4a2 2 0 00-2 2v6a2 2 0 002 2h12a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H7a2 2 0 00-2 2zm8 0H7v3h6V4zm0 8H7v4h6v-4z" clip-rule="evenodd" /></svg>
+                </button>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <h2 id="table-title" class="text-xl font-semibold text-center mb-4 text-gray-800"></h2>
+                <div id="table-container"></div>
+            </div>
+        </main>
+
+        <footer class="mt-6 rounded-lg shadow-md bg-white">
+            <div class="h-10 bg-gradient-to-l from-green-500 via-teal-500 to-blue-500 rounded-t-lg" style="--tw-gradient-from: #34ad82; --tw-gradient-to: #2490ac;"></div>
+            <div class="p-4 flex justify-between items-center">
+                <div class="flex items-center gap-4">
+                    <img src="https://j.top4top.io/p_3516qltr40.png" alt="شعار الوزارة" class="h-16 opacity-0">
+                </div>
+                <div class="flex gap-8">
+                    <input type="text" id="supervisor-name" placeholder="اسم مشرف الإذاعة" class="text-center block w-48 bg-transparent border-b border-gray-300 focus:outline-none focus:border-blue-500">
+                    <input type="text" id="manager-name" placeholder="اسم مدير المدرسة" class="text-center block w-48 bg-transparent border-b border-gray-300 focus:outline-none focus:border-blue-500">
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Custom Confirm Modal -->
+    <div id="confirm-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white p-6 rounded-lg shadow-xl text-center">
+            <p id="confirm-message" class="mb-4 text-lg">هل أنت متأكد؟</p>
+            <button id="confirm-yes" class="bg-red-600 text-white px-6 py-2 rounded-md hover:bg-red-700 mx-2">نعم</button>
+            <button id="confirm-no" class="bg-gray-300 text-black px-6 py-2 rounded-md hover:bg-gray-400 mx-2">إلغاء</button>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const weekSelector = document.getElementById('week-selector');
+            const tableContainer = document.getElementById('table-container');
+            const tableTitle = document.getElementById('table-title');
+            const printButton = document.getElementById('print-button');
+            const clearButton = document.getElementById('clear-button');
+            const saveStatus = document.getElementById('save-status');
+            const confirmModal = document.getElementById('confirm-modal');
+            const confirmMessage = document.getElementById('confirm-message');
+            const confirmYes = document.getElementById('confirm-yes');
+            const confirmNo = document.getElementById('confirm-no');
+            const regionRadios = document.querySelectorAll('input[name="region"]');
+
+            const dayNames = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'];
+            let saveTimeout;
+            let confirmCallback = null;
+
+            // --- DATA HANDLING ---
+            function saveData() {
+                const weekKey = weekSelector.value;
+                if (!weekKey) return;
+
+                const tableRows = tableContainer.querySelectorAll('tbody tr');
+                const weekData = Array.from(tableRows).map(row => {
+                    if (row.classList.contains('holiday-row')) {
+                        return { holiday: true, text: row.querySelector('td').textContent };
+                    }
+                    return {
+                        teacher: row.querySelector('.teacher-input').value,
+                        status: row.querySelector('.status-select').value,
+                        signature: row.querySelector('.signature-input').value,
+                    };
+                });
+                
+                const generalData = {
+                    eduAdmin: document.getElementById('edu-admin').value,
+                    schoolName: document.getElementById('school-name').value,
+                    supervisorName: document.getElementById('supervisor-name').value,
+                    managerName: document.getElementById('manager-name').value,
+                    selectedRegion: document.querySelector('input[name="region"]:checked').value
+                };
+
+                localStorage.setItem(`radio_week_${weekKey}`, JSON.stringify(weekData));
+                localStorage.setItem('radio_general', JSON.stringify(generalData));
+
+                saveStatus.classList.remove('opacity-0');
+                clearTimeout(saveTimeout);
+                saveTimeout = setTimeout(() => saveStatus.classList.add('opacity-0'), 2000);
+            }
+
+            function loadGeneralData() {
+                const generalData = JSON.parse(localStorage.getItem('radio_general'));
+                if (generalData) {
+                    document.getElementById('edu-admin').value = generalData.eduAdmin || '';
+                    document.getElementById('school-name').value = generalData.schoolName || '';
+                    document.getElementById('supervisor-name').value = generalData.supervisorName || '';
+                    document.getElementById('manager-name').value = generalData.managerName || '';
+                    if (generalData.selectedRegion) {
+                        document.querySelector(`input[name="region"][value="${generalData.selectedRegion}"]`).checked = true;
+                    }
+                }
+            }
+            
+            function loadWeekData(weekKey) {
+                if (!weekKey) return;
+                const weekData = JSON.parse(localStorage.getItem(`radio_week_${weekKey}`));
+                const tableRows = tableContainer.querySelectorAll('tbody tr');
+                if (weekData && tableRows.length) {
+                    tableRows.forEach((row, index) => {
+                        if (weekData[index] && !weekData[index].holiday) {
+                            row.querySelector('.teacher-input').value = weekData[index].teacher || '';
+                            row.querySelector('.status-select').value = weekData[index].status || 'نفذ';
+                            row.querySelector('.signature-input').value = weekData[index].signature || '';
+                        }
+                    });
+                }
+            }
+
+            // --- UI GENERATION ---
+            const academicWeeksData = {
+                default: [
+                    { value: 'week1', text: 'الأسبوع الأول', dates: ['١ / ٣', '٢ / ٣', '٣ / ٣', '٤ / ٣', '٥ / ٣'] },
+                    { value: 'week2', text: 'الأسبوع الثاني', dates: ['٨ / ٣', '٩ / ٣', '١٠ / ٣', '١١ / ٣', '١٢ / ٣'] },
+                    { value: 'week3', text: 'الأسبوع الثالث', dates: ['١٥ / ٣', '١٦ / ٣', '١٧ / ٣', '١٨ / ٣', '١٩ / ٣'] },
+                    { value: 'week4', text: 'الأسبوع الرابع', dates: ['٢٢ / ٣', '٢٣ / ٣', '٢٤ / ٣', '٢٥ / ٣', '٢٦ / ٣'] },
+                    { value: 'week5', text: 'الأسبوع الخامس', dates: ['٢٩ / ٣', '٣٠ / ٣', '١ / ٤', '٢ / ٤', '٣ / ٤'] },
+                    { value: 'week6', text: 'الأسبوع السادس', dates: ['٦ / ٤', '٧ / ٤', '٨ / ٤', '٩ / ٤', '١٠ / ٤'] },
+                    { value: 'week7', text: 'الأسبوع السابع', dates: ['١٣ / ٤', '١٤ / ٤', '١٥ / ٤', '١٦ / ٤', '١٧ / ٤'] },
+                    { value: 'week8', text: 'الأسبوع الثامن', dates: ['٢٠ / ٤', '٢١ / ٤', '٢٢ / ٤', '٢٣ / ٤', '٢٤ / ٤'] },
+                    { value: 'week9', text: 'الأسبوع التاسع', dates: ['٢٧ / ٤', '٢٨ / ٤', '٢٩ / ٤', '٣٠ / ٤', '١ / ٥'] },
+                    { value: 'week10', text: 'الأسبوع العاشر', dates: ['٤ / ٥', '٥ / ٥', '٦ / ٥', '٧ / ٥', '٨ / ٥'] },
+                    { value: 'week11', text: 'الأسبوع الحادي عشر', dates: ['١١ / ٥', '١٢ / ٥', '١٣ / ٥', '١٤ / ٥', '١٥ / ٥'] },
+                    { value: 'week12', text: 'الأسبوع الثاني عشر', dates: ['١٨ / ٥', '١٩ / ٥', '٢٠ / ٥', '٢١ / ٥', '٢٢ / ٥'] },
+                    { value: 'week13', text: 'الأسبوع الثالث عشر', dates: ['٢٥ / ٥', '٢٦ / ٥', '٢٧ / ٥', '٢٨ / ٥', '٢٩ / ٥'] },
+                    { value: 'week14', text: 'الأسبوع الرابع عشر', dates: ['٩ / ٦', '١٠ / ٦', '١١ / ٦', '١٢ / ٦', '١٣ / ٦'] },
+                    { value: 'week15', text: 'الأسبوع الخامس عشر', dates: ['١٦ / ٦', '١٧ / ٦', '١٨ / ٦', '١٩ / ٦', '٢٠ / ٦'] },
+                    { value: 'week16', text: 'الأسبوع السادس عشر', dates: ['٢٣ / ٦', '٢٤ / ٦', '٢٥ / ٦', '٢٦ / ٦', '٢٧ / ٦'] },
+                    { value: 'week17', text: 'الأسبوع السابع عشر', dates: ['١ / ٧', '٢ / ٧', '٣ / ٧', '٤ / ٧', '٥ / ٧'] },
+                    { value: 'week18', text: 'الأسبوع الثامن عشر', dates: ['٨ / ٧', '٩ / ٧', '١٠ / ٧', '١١ / ٧', '١٢ / ٧'] }
+                ],
+                western: [
+                    { value: 'week1', text: 'الأسبوع الأول', dates: ['٨ / ٣', '٩ / ٣', '١٠ / ٣', '١١ / ٣', '١٢ / ٣'] },
+                    { value: 'week2', text: 'الأسبوع الثاني', dates: ['١٥ / ٣', '١٦ / ٣', '١٧ / ٣', '١٨ / ٣', '١٩ / ٣'] },
+                    { value: 'week3', text: 'الأسبوع الثالث', dates: ['٢٢ / ٣', '٢٣ / ٣', '٢٤ / ٣', '٢٥ / ٣', '٢٦ / ٣'] },
+                    { value: 'week4', text: 'الأسبوع الرابع', dates: ['٢٩ / ٣', '٣٠ / ٣', '١ / ٤', '٢ / ٤', '٣ / ٤'] },
+                    { value: 'week5', text: 'الأسبوع الخامس', dates: ['٦ / ٤', '٧ / ٤', '٨ / ٤', '٩ / ٤', '١٠ / ٤'] },
+                    { value: 'week6', text: 'الأسبوع السادس', dates: ['١٣ / ٤', '١٤ / ٤', '١٥ / ٤', '١٦ / ٤', '١٧ / ٤'] },
+                    { value: 'week7', text: 'الأسبوع السابع', dates: ['٢٠ / ٤', '٢١ / ٤', '٢٢ / ٤', '٢٣ / ٤', '٢٤ / ٤'] },
+                    { value: 'week8', text: 'الأسبوع الثامن', dates: ['٢٧ / ٤', '٢٨ / ٤', '٢٩ / ٤', '٣٠ / ٤', '١ / ٥'] },
+                    { value: 'week9', text: 'الأسبوع التاسع', dates: ['٤ / ٥', '٥ / ٥', '٦ / ٥', '٧ / ٥', '٨ / ٥'] },
+                    { value: 'week10', text: 'الأسبوع العاشر', dates: ['١١ / ٥', '١٢ / ٥', '١٣ / ٥', '١٤ / ٥', '١٥ / ٥'] },
+                    { value: 'week11', text: 'الأسبوع الحادي عشر', dates: ['١٨ / ٥', '١٩ / ٥', '٢٠ / ٥', '٢١ / ٥', '٢٢ / ٥'] },
+                    { value: 'week12', text: 'الأسبوع الثاني عشر', dates: ['٢٥ / ٥', '٢٦ / ٥', '٢٧ / ٥', '٢٨ / ٥', '٢٩ / ٥'] },
+                    { value: 'week13', text: 'الأسبوع الثالث عشر', dates: ['٩ / ٦', '١٠ / ٦', '١١ / ٦', '١٢ / ٦', '١٣ / ٦'] },
+                    { value: 'week14', text: 'الأسبوع الرابع عشر', dates: ['١٦ / ٦', '١٧ / ٦', '١٨ / ٦', '١٩ / ٦', '٢٠ / ٦'] },
+                    { value: 'week15', text: 'الأسبوع الخامس عشر', dates: ['٢٣ / ٦', '٢٤ / ٦', '٢٥ / ٦', '٢٦ / ٦', '٢٧ / ٦'] },
+                    { value: 'week16', text: 'الأسبوع السادس عشر', dates: ['١ / ٧', '٢ / ٧', '٣ / ٧', '٤ / ٧', '٥ / ٧'] },
+                    { value: 'week17', text: 'الأسبوع السابع عشر', dates: ['٨ / ٧', '٩ / ٧', '١٠ / ٧', '١١ / ٧', '١٢ / ٧'] },
+                    // **FIX**: Removed week 18 for western region
+                ]
+            };
+
+            const holidays = {
+                '١ / ٤': { text: 'إجازة اليوم الوطني', color: 'bg-green-100' },
+                '٢٠ / ٤': { text: 'إجازة إضافية', color: 'bg-red-100' },
+                '٢٠ / ٦': { text: 'إجازة إضافية', color: 'bg-red-100' },
+                '٢٣ / ٦': { text: 'إجازة إضافية', color: 'bg-red-100' }
+            };
+
+            function populateWeeks(region = 'default') {
+                weekSelector.innerHTML = '<option value="">الرجاء اختيار أسبوع</option>';
+                const weeks = academicWeeksData[region];
+                weeks.forEach(week => {
+                    const option = document.createElement('option');
+                    option.value = week.value;
+                    option.textContent = week.text;
+                    weekSelector.appendChild(option);
+                });
+            }
+            
+            function generateTableForWeek(weekValue) {
+                if (!weekValue) {
+                    tableContainer.innerHTML = '';
+                    tableTitle.textContent = 'اختر أسبوعًا لعرض الجدول';
+                    return;
+                }
+                
+                const region = document.querySelector('input[name="region"]:checked').value;
+                const selectedWeek = academicWeeksData[region].find(w => w.value === weekValue);
+                tableTitle.textContent = `جدول الإذاعة لـ ${selectedWeek.text}`;
+
+                let tableHTML = `<table class="min-w-full bg-white border border-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="py-3 px-4 border text-center">اليوم</th><th class="py-3 px-4 border text-center">التاريخ</th>
+                                <th class="py-3 px-4 border text-center">اسم المعلم/ـة</th><th class="py-3 px-4 border text-center">التنفيذ</th>
+                                <th class="py-3 px-4 border text-center">التوقيع</th>
+                            </tr>
+                        </thead><tbody>`;
+
+                selectedWeek.dates.forEach((dateString, i) => {
+                    if (holidays[dateString]) {
+                        tableHTML += `<tr class="text-center holiday-row ${holidays[dateString].color}">
+                            <td class="py-3 px-4 border font-bold" colspan="5">${holidays[dateString].text}</td>
+                        </tr>`;
+                    } else {
+                        tableHTML += `<tr class="text-center">
+                                <td class="py-3 px-4 border">${dayNames[i]}</td><td class="py-3 px-4 border">${dateString}</td>
+                                <td class="py-3 px-4 border"><input type="text" class="teacher-input w-full text-center border-none focus:ring-0 bg-transparent"></td>
+                                <td class="py-3 px-4 border"><select class="status-select w-full text-center border-none focus:ring-0 bg-transparent">
+                                        <option value="نفذ">نفذ</option><option value="لم ينفذ">لم ينفذ</option></select></td>
+                                <td class="py-3 px-4 border"><input type="text" class="signature-input w-full text-center border-none focus:ring-0 bg-transparent"></td>
+                            </tr>`;
+                    }
+                });
+                tableHTML += `</tbody></table>`;
+                tableContainer.innerHTML = tableHTML;
+                
+                tableContainer.querySelectorAll('input, select').forEach(el => el.addEventListener('input', saveData));
+                loadWeekData(weekValue);
+            }
+
+            // --- MODAL & PRINTING ---
+            function showConfirm(message, callback) {
+                confirmMessage.textContent = message;
+                confirmCallback = callback;
+                confirmModal.classList.remove('hidden');
+            }
+
+            function prepareAndPrintAllWeeks() {
+                const eduAdminVal = document.getElementById('edu-admin').value;
+                const schoolNameVal = document.getElementById('school-name').value;
+                const supervisorNameVal = document.getElementById('supervisor-name').value;
+                const managerNameVal = document.getElementById('manager-name').value;
+                const selectedRegion = document.querySelector('input[name="region"]:checked').value;
+                const weeksToPrint = academicWeeksData[selectedRegion];
+                
+                let schoolInfoHTML = '';
+                if (eduAdminVal) schoolInfoHTML += `<p>${eduAdminVal}</p>`;
+                if (schoolNameVal) schoolInfoHTML += `<p style="color: #28a745 !important; font-weight: bold;">${schoolNameVal}</p>`;
+
+                let allWeeksHTML = '';
+                
+                weeksToPrint.forEach((week) => {
+                    const weekKey = week.value;
+                    const weekTitle = week.text;
+                    let weekData = JSON.parse(localStorage.getItem(`radio_week_${weekKey}`));
+
+                    if (!weekData) {
+                        weekData = Array(5).fill({ teacher: '', status: 'نفذ', signature: '' });
+                    }
+
+                    let tableRowsHTML = '';
+                    week.dates.forEach((dateString, i) => {
+                        const dayData = weekData[i] || {};
+
+                        if (holidays[dateString]) {
+                             tableRowsHTML += `<tr style="background-color: ${holidays[dateString].color === 'bg-green-100' ? '#d4edda' : '#f8d7da'} !important;">
+                                <td colspan="5" style="font-weight: bold;">${holidays[dateString].text}</td>
+                             </tr>`;
+                        } else {
+                            let statusCell = '&nbsp;';
+                            if (dayData.teacher) {
+                                if(dayData.status === 'نفذ') {
+                                    statusCell = `<span style="color: #28a745 !important; font-weight: bold;">${dayData.status}</span>`;
+                                } else if (dayData.status === 'لم ينفذ') {
+                                    statusCell = `<span style="color: #dc3545 !important; font-weight: bold;">${dayData.status}</span>`;
+                                }
+                            }
+                            tableRowsHTML += `<tr>
+                                <td>${dayNames[i]}</td><td>${dateString}</td>
+                                <td>${dayData.teacher || '&nbsp;'}</td><td>${statusCell}</td>
+                                <td>${dayData.signature || '&nbsp;'}</td></tr>`;
+                        }
+                    });
+
+                    allWeeksHTML += `<div class="week-container">
+                            <h3>${weekTitle}</h3>
+                            <table class="print-table-small">
+                                <thead><tr><th>اليوم</th><th>التاريخ</th><th>المعلم</th><th>التنفيذ</th><th>التوقيع</th></tr></thead>
+                                <tbody>${tableRowsHTML}</tbody>
+                            </table>
+                        </div>`;
+                });
+
+
+                const printWindow = window.open('', '_blank');
+                printWindow.document.write(`
+                    <html><head><title>طباعة تقرير الإذاعة - ملخص الأسابيع</title>
+                    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+                    <style>
+                        body { 
+                            font-family: 'Cairo', sans-serif; 
+                            direction: rtl; 
+                            -webkit-print-color-adjust: exact !important; 
+                            color-adjust: exact !important; 
+                            margin: 0;
+                        }
+                        @page { 
+                            size: A4 landscape; 
+                            margin: 0; 
+                        }
+                        table.print-layout {
+                            width: 100%;
+                            border-collapse: collapse;
+                        }
+                        thead.print-header-group {
+                            display: table-header-group;
+                        }
+                        tfoot.print-footer-group {
+                            display: table-footer-group;
+                        }
+                        .page-container {
+                            padding: 0.5cm;
+                        }
+                        .print-header { 
+                            background-color: #003a46 !important; 
+                            color: white; 
+                            padding: 5px 0;
+                        }
+                        .header-top { 
+                            position: relative;
+                            min-height: 50px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            padding: 0 0.5cm;
+                        }
+                        .header-title { 
+                            font-size: 1.4rem;
+                            font-weight: bold;
+                        }
+                        .header-right-block { 
+                            position: absolute;
+                            right: 0.5cm;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            display: flex; 
+                            align-items: center; 
+                            gap: 15px; 
+                        }
+                        .header-logo { height: 3.0rem; order: 1; }
+                        .header-info { text-align: right; order: 2; }
+                        .header-info p { margin: 0; line-height: 1.2; font-size: 0.9rem; }
+                        
+                        .header-gradient { 
+                            height: 4px; 
+                            background: linear-gradient(to left, #34ad82, #2490ac) !important; 
+                        }
+                        
+                        .grid-container { 
+                            display: grid; 
+                            grid-template-columns: repeat(3, 1fr); 
+                            gap: 10px; 
+                            padding: 10px 0; 
+                        }
+                        .week-container { 
+                            border: 1px solid #ccc; 
+                            border-radius: 5px; 
+                            page-break-inside: avoid; 
+                        }
+                        .week-container h3 { 
+                            font-size: 0.8rem; 
+                            text-align: center; 
+                            margin: 0; 
+                            padding: 3px; 
+                            background-color: #e9ecef !important; 
+                            border-bottom: 1px solid #ccc; 
+                            border-radius: 5px 5px 0 0;
+                        }
+                        .print-table-small { 
+                            width: 100%; 
+                            border-collapse: collapse; 
+                            font-size: 0.65rem; 
+                        }
+                        .print-table-small th, .print-table-small td { 
+                            border: 1px solid #ccc; 
+                            padding: 2px; 
+                            text-align: center; 
+                        }
+                        .print-table-small thead { 
+                            background-color: #f8f9fa !important; 
+                        }
+                        .print-footer {
+                           padding: 0 0.5cm;
+                        }
+                        .footer-content {
+                            display: flex; 
+                            justify-content: space-between; 
+                            font-size: 1rem; 
+                            font-weight: 600;
+                            padding-top: 10px;
+                        }
+                        .footer-gradient { 
+                            width: 100%; 
+                            height: 10px; 
+                            background: linear-gradient(to left, #34ad82, #2490ac) !important; 
+                        }
+                    </style>
+                    </head>
+                    <body>
+                        <table class="print-layout">
+                            <thead class="print-header-group">
+                                <tr>
+                                    <td>
+                                        <div class="print-header">
+                                            <div class="header-top">
+                                                <h1 class="header-title">متابعة الإذاعة المدرسية</h1>
+                                                <div class="header-right-block">
+                                                    <img src="https://j.top4top.io/p_3516qltr40.png" alt="شعار الوزارة" class="header-logo">
+                                                    <div class="header-info">${schoolInfoHTML}</div>
+                                                </div>
+                                            </div>
+                                            <div class="header-gradient"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="page-container">
+                                            <div class="grid-container">${allWeeksHTML}</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot class="print-footer-group">
+                                <tr>
+                                    <td>
+                                        <div class="print-footer">
+                                            <div class="footer-content">
+                                                <p>${supervisorNameVal || ''}</p>
+                                                <p>${managerNameVal || ''}</p>
+                                            </div>
+                                            <div class="footer-gradient"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </body></html>`);
+                printWindow.document.close();
+                printWindow.focus();
+                setTimeout(() => { printWindow.print(); printWindow.close(); }, 500);
+            }
+
+            // --- EVENT LISTENERS ---
+            document.getElementById('edu-admin').addEventListener('input', saveData);
+            document.getElementById('school-name').addEventListener('input', saveData);
+            document.getElementById('supervisor-name').addEventListener('input', saveData);
+            document.getElementById('manager-name').addEventListener('input', saveData);
+
+            weekSelector.addEventListener('change', (e) => generateTableForWeek(e.target.value));
+            
+            printButton.addEventListener('click', prepareAndPrintAllWeeks);
+
+            clearButton.addEventListener('click', () => {
+                showConfirm('هل أنت متأكد من رغبتك في مسح جميع البيانات المحفوظة؟', () => {
+                    localStorage.clear();
+                    location.reload();
+                });
+            });
+
+            confirmNo.addEventListener('click', () => confirmModal.classList.add('hidden'));
+            confirmYes.addEventListener('click', () => {
+                if (confirmCallback) confirmCallback();
+                confirmModal.classList.add('hidden');
+            });
+
+            regionRadios.forEach(radio => {
+                radio.addEventListener('change', (event) => {
+                    populateWeeks(event.target.value);
+                    generateTableForWeek(null); // Reset table view
+                    saveData(); // Save the new region choice
+                });
+            });
+            
+            // --- INITIALIZATION ---
+            loadGeneralData();
+            const currentRegion = document.querySelector('input[name="region"]:checked').value;
+            populateWeeks(currentRegion);
+            generateTableForWeek(null);
+        });
+    </script>
+</body>
+</html>
