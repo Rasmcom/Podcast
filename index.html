@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إذاعة المدرسة الذكية</title>
+    <title>إذاعة المدرسة الذكية - الإصدار المطور</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +24,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.3); /* Dark overlay, 70% image visibility */
+            background-color: rgba(0, 0, 0, 0.3);
             z-index: -1;
         }
         .broadcast-content h3 {
@@ -44,22 +44,19 @@
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        .modal-overlay {
-            transition: opacity 0.3s ease;
-        }
         .header-new-bg {
             background-image: url('https://img.freepik.com/free-photo/abstract-2d-colorful-wallpaper-with-grainy-gradients_23-2151001646.jpg');
             background-size: cover;
             background-position: center;
         }
         .student-name {
-            color: #1e3a8a; /* Navy Blue */
+            color: #1e3a8a;
             font-weight: bold;
         }
         .broadcast-card {
             position: relative;
             padding: 1.5rem;
-            padding-right: 2.5rem; /* Space for the color bar */
+            padding-right: 2.5rem;
             margin-bottom: 1.5rem;
             border-radius: 0.75rem;
             border-right-width: 8px;
@@ -67,12 +64,12 @@
         /* Floating Button Styles */
         .floating-button {
             position: fixed;
-            top: 25px; /* Moved to top */
-            left: 25px; /* Kept on left */
+            top: 25px;
+            left: 25px;
             z-index: 1000;
             display: flex;
             align-items: center;
-            padding: 6px; /* Reduced padding */
+            padding: 6px;
             background-color: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
@@ -85,31 +82,81 @@
         }
         .floating-button:hover {
             background-color: rgba(255, 255, 255, 0.9);
-            transform: translateY(-2px) scale(1.03); /* Adjusted hover effect */
+            transform: translateY(-2px) scale(1.03);
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
         }
         .floating-button img {
-            width: 35px; /* Reduced size */
-            height: 35px; /* Reduced size */
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
         }
         .floating-button span {
-            margin-right: 10px; /* Adjusted margin */
+            margin-right: 10px;
             margin-left: 6px;
-            font-size: 0.9rem; /* Reduced font size */
+            font-size: 0.9rem;
         }
         /* Tab Styles */
         .tab-button {
             transition: all 0.3s ease;
         }
         .tab-button.active {
-            background-color: #2563eb; /* blue-600 */
+            background-color: #2563eb;
             color: white;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
         .tab-button:not(.active) {
              background-color: white;
-             color: #1e3a8a; /* blue-900 */
+             color: #1e3a8a;
+        }
+
+        /* --- STYLES FOR DYNAMIC SECTIONS (Manual Mode) --- */
+        .section-card {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .section-card:hover {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .section-controls {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            justify-content: flex-end;
+        }
+        .control-btn {
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            border: 1px solid #ddd;
+        }
+        .btn-up, .btn-down { background-color: #f3f4f6; color: #374151; }
+        .btn-up:hover, .btn-down:hover { background-color: #d1d5db; }
+        .btn-delete { background-color: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+        .btn-delete:hover { background-color: #fecaca; }
+        
+        .section-title-input {
+            font-weight: bold;
+            color: #1e3a8a;
+            border: none;
+            background: transparent;
+            border-bottom: 2px solid #e5e7eb;
+            width: 100%;
+            margin-bottom: 0.5rem;
+            padding: 0.25rem;
+            font-size: 1.1rem;
+        }
+        .section-title-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            background-color: rgba(255,255,255,0.5);
         }
     </style>
 </head>
@@ -127,11 +174,9 @@
             </p>
             <p class="text-gray-600 font-semibold mb-6">يرجى الضغط على "أوافق" للمتابعة</p>
             <button id="agree-button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition duration-300 w-full mb-8 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">أوافق</button>
-            
             <hr>
-
             <div class="mt-6">
-                <p class="text-gray-800 mb-4">لطلباتكم يشرفنا تواصلكم على متجر رسم للتصميم والخدمات التعليمية. اضغط على الشعار لزيارتنا وتشريفنا.</p>
+                <p class="text-gray-800 mb-4">لطلباتكم يشرفنا تواصلكم على متجر رسم للتصميم والخدمات التعليمية.</p>
                 <a href="https://www.rasmcom.com" target="_blank" rel="noopener noreferrer">
                     <img src="https://e.top4top.io/p_3463x5tj40.png" alt="شعار متجر رسم" class="h-20 w-auto mx-auto transition-transform duration-300 hover:scale-110">
                 </a>
@@ -161,19 +206,14 @@
             <!-- Automatic Controls Section -->
             <div id="automatic-controls">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 p-6 rounded-xl shadow-lg glass-container">
-                    <!-- Topic Selection -->
                     <div class="min-w-0">
                         <label for="topic" class="block mb-2 text-sm font-medium text-gray-700">اختر الموضوع:</label>
-                        <select id="topic" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                            <!-- Options will be generated by JS -->
-                        </select>
+                        <select id="topic" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"></select>
                     </div>
-                     <!-- Date Selection -->
                     <div class="min-w-0">
-                        <label for="broadcast-date-input" class="block mb-2 text-sm font-medium text-gray-700">اختر التاريخ: <span class="text-xs text-gray-500">(سيتم تحويله لهجري)</span></label>
+                        <label for="broadcast-date-input" class="block mb-2 text-sm font-medium text-gray-700">اختر التاريخ:</label>
                         <input type="date" id="broadcast-date-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                     </div>
-                    <!-- Gender Selection -->
                     <div class="min-w-0">
                         <label for="gender" class="block mb-2 text-sm font-medium text-gray-700">اختر الجنس:</label>
                         <select id="gender" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
@@ -181,7 +221,6 @@
                             <option value="girls">بنات</option>
                         </select>
                     </div>
-                    <!-- Supervisor Name -->
                     <div class="min-w-0">
                         <label for="supervisor" class="block mb-2 text-sm font-medium text-gray-700">اسم المشرف/ـة:</label>
                         <input type="text" id="supervisor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="أ. فلان الفلاني">
@@ -189,7 +228,7 @@
                 </div>
             </div>
 
-            <!-- Manual Controls Section -->
+            <!-- Manual Controls Section (DYNAMIC) -->
             <div id="manual-controls" class="hidden">
                  <!-- Saved broadcasts management -->
                 <div class="p-6 mb-8 rounded-xl shadow-lg glass-container">
@@ -207,43 +246,28 @@
                 </div>
                 <!-- Manual input form -->
                 <div class="p-6 rounded-xl shadow-lg glass-container mb-8">
-                     <h3 class="text-xl font-bold mb-4 text-blue-900">إنشاء إذاعة يدوية</h3>
-                     <div class="space-y-4">
-                        <div>
-                            <label for="manual-broadcast-name" class="block text-sm font-medium text-gray-700">اسم الإذاعة (للحفظ والعرض)</label>
-                            <input type="text" id="manual-broadcast-name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                        <div>
-                            <label for="manual-intro-conclusion" class="block text-sm font-medium text-gray-700">المقدمة والخاتمة</label>
-                            <textarea id="manual-intro-conclusion" rows="5" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="اكتب هنا المقدمة الكاملة للإذاعة وخاتمتها..."></textarea>
-                        </div>
-                        <div>
-                            <label for="manual-quran" class="block text-sm font-medium text-gray-700">فقرة القرآن الكريم</label>
-                            <textarea id="manual-quran" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
-                        </div>
-                         <div>
-                            <label for="manual-hadith" class="block text-sm font-medium text-gray-700">فقرة الحديث الشريف</label>
-                            <textarea id="manual-hadith" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
-                        </div>
-                         <div>
-                            <label for="manual-did-you-know" class="block text-sm font-medium text-gray-700">فقرة هل تعلم</label>
-                            <textarea id="manual-did-you-know" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
-                        </div>
-                         <div>
-                            <label for="manual-wisdom" class="block text-sm font-medium text-gray-700">فقرة حكمة اليوم</label>
-                            <textarea id="manual-wisdom" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
-                        </div>
-                        <div>
-                            <label for="manual-morning-word" class="block text-sm font-medium text-gray-700">فقرة كلمة الصباح</label>
-                            <textarea id="manual-morning-word" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
-                        </div>
+                     <h3 class="text-xl font-bold mb-4 text-blue-900">إنشاء إذاعة يدوية (فقرات مرنة)</h3>
+                     
+                     <div class="mb-6">
+                        <label for="manual-broadcast-name" class="block text-sm font-medium text-gray-700">اسم الإذاعة (للحفظ والعرض)</label>
+                        <input type="text" id="manual-broadcast-name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="مثال: إذاعة عن الصداقة">
                      </div>
-                     <div class="mt-6 flex justify-end">
-                        <button id="save-manual-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">حفظ وعرض الإذاعة</button>
+
+                     <!-- Dynamic Sections Container -->
+                     <div id="manual-sections-container" class="space-y-4">
+                        <!-- Sections injected by JS -->
+                     </div>
+
+                     <button id="add-new-section-btn" class="mt-4 w-full border-2 border-dashed border-blue-300 text-blue-700 hover:bg-blue-50 font-bold py-3 px-4 rounded-lg transition duration-300 flex justify-center items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        إضافة فقرة جديدة
+                    </button>
+
+                     <div class="mt-8 flex justify-end border-t pt-4">
+                        <button id="save-manual-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition">حفظ وعرض الإذاعة</button>
                      </div>
                 </div>
             </div>
-
 
             <!-- Broadcast Display Section -->
             <main id="broadcast-display" class="p-4 sm:p-6 rounded-xl shadow-lg min-h-[500px] glass-container">
@@ -264,7 +288,7 @@
                     </div>
                 </div>
                 <div id="broadcast-content" class="broadcast-content">
-                    <!-- Content will be injected here by JS -->
+                    <!-- Content injected here -->
                 </div>
             </main>
 
@@ -280,37 +304,15 @@
         </div>
     </div>
 
-
-    <!-- Names Modal -->
+    <!-- Dynamic Names Modal -->
     <div id="names-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 modal-overlay opacity-0 pointer-events-none">
-        <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md m-4 transform scale-95 transition-transform duration-300 glass-container">
+        <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md m-4 transform scale-95 transition-transform duration-300 glass-container max-h-[90vh] overflow-y-auto">
             <h3 class="text-2xl font-bold mb-6 text-center text-blue-800">إضافة أسماء الطلاب</h3>
-            <div class="space-y-4">
-                <div>
-                    <label for="name-presenter" class="block text-sm font-medium text-gray-700">مقدم الإذاعة</label>
-                    <input type="text" id="name-presenter" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                </div>
-                <div>
-                    <label for="name-quran" class="block text-sm font-medium text-gray-700">فقرة القرآن الكريم</label>
-                    <input type="text" id="name-quran" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                </div>
-                <div>
-                    <label for="name-hadith" class="block text-sm font-medium text-gray-700">فقرة الحديث الشريف</label>
-                    <input type="text" id="name-hadith" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                </div>
-                 <div>
-                    <label for="name-morning-word" class="block text-sm font-medium text-gray-700">فقرة كلمة الصباح</label>
-                    <input type="text" id="name-morning-word" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                </div>
-                <div>
-                    <label for="name-did-you-know" class="block text-sm font-medium text-gray-700">فقرة هل تعلم</label>
-                    <input type="text" id="name-did-you-know" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                </div>
-                <div>
-                    <label for="name-wisdom" class="block text-sm font-medium text-gray-700">فقرة حكمة اليوم</label>
-                    <input type="text" id="name-wisdom" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                </div>
+            
+            <div id="dynamic-names-container" class="space-y-4">
+                <!-- Fields generated by JS -->
             </div>
+
             <div class="mt-8 flex justify-end gap-3">
                 <button id="close-modal-button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg">إغلاق</button>
                 <button id="save-names-button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">حفظ</button>
@@ -326,66 +328,11 @@
 
     <script>
         // --- DATA STORE ---
+        // (You can add more topics here as in previous versions)
         const broadcasts = [
             { topic: "الذكاء الاصطناعي", quran: "﴿وَعَلَّمَ آدَمَ الْأَسْمَاءَ كُلَّهَا﴾ [البقرة: 31]", hadith: "قال رسول الله ﷺ: “إن الله يحب إذا عمل أحدكم عملاً أن يتقنه”", didYouKnow: "هل تعلم أن الذكاء الاصطناعي يساعد في تشغيل المساعدات الصوتية في هواتفنا مثل سيري ومساعد جوجل؟", wisdom: "الذكاء الاصطناعي هو كهرباء القرن الحادي والعشرين.", morningWord: "الذكاء الاصطناعي هو محاولة لمحاكاة الذكاء البشري في الآلات. إنه أداة قوية تساعدنا في حل المشكلات المعقدة في الطب والهندسة وغيرها، وعلينا أن نحرص على استخدامه فيما ينفع البشرية." },
             { topic: "الأمن السيبراني", quran: "﴿يَا أَيُّهَا الَّذِينَ آمَنُوا اجْتَنِبُوا كَثِيرًا مِّنَ الظَّنِّ إِنَّ بَعْضَ الظَّنِّ إِثْمٌ ۖ وَلَا تَجَسَّسُوا﴾ [الحجرات: 12]", hadith: "قال رسول الله ﷺ: “المسلم من سلم المسلمون من لسانه ويده”", didYouKnow: "هل تعلم أن استخدام كلمة مرور قوية ومختلفة لكل حساب هو خط الدفاع الأول ضد الاختراق؟", wisdom: "الوقاية في العالم الرقمي تبدأ بكلمة مرور قوية.", morningWord: "في عالمنا الرقمي، أصبح الأمن السيبراني ضرورة لحماية معلوماتنا الشخصية. فلنكن يا [زملاء] مواطنين رقميين مسؤولين، نحافظ على خصوصيتنا ولا نضغط على الروابط المشبوهة." },
-            { topic: "الانضباط المدرسي", quran: "﴿وَأَنْ لَيْسَ لِلْإِنْسَانِ إِلَّا مَا سَعَىٰ، وَأَنَّ سَعْيَهُ سَوْفَ يُرَىٰ﴾ (النجم: 39-40).", hadith: "قال رسول الله صلى الله عليه وسلم: “مَن سلَك طريقًا يلتمس فيه علمًا، سهَّل الله له طريقًا إلى الجنَّة...”", didYouKnow: "هل تعلم أن الطلاب الذين يحافظون على الحضور المنتظم يحققون درجات أفضل من غيرهم؟", wisdom: "الوقت كالسيف إن لم تقطعه قطعك.", morningWord: "يعتبر الانضباط المدرسي هو أحد أفضل السلوكيات الإيجابية التي يجب أن يتحلى بها جميع الطلاب. وقامت مدرستنا بوضع قواعد يأتي في مقدمتها الانتظام في الحضور وعدم الغياب إلا للضرورة القصوى. فيجب على جميع الطلاب أن يكونوا على قدر كبير بثقة أهلهم ويلتزموا بالحضور والتفوق الدراسي." },
-            { topic: "القيم الإسلامية", quran: "﴿إِنَّ الدِّينَ عِندَ اللَّهِ الْإِسْلَامُ﴾ [آل عمران: 19]", hadith: "قال رسول الله ﷺ: “المؤمن القوي خير وأحب إلى الله من المؤمن الضعيف، وفي كل خير” (رواه مسلم).", didYouKnow: "هل تعلم أن التمسك بالقيم الإسلامية هو الطريق إلى سعادة الدنيا والفوز بالآخرة؟", wisdom: "من اتقى الله جعل له من كل ضيق مخرجًا.", morningWord: "القيم الإسلامية ليست شعارات تُرفع، بل هي سلوك يومي نعيشه؛ كالصدق في القول، والإحسان في الفعل، والرحمة بالضعيف. فكونوا يا [زملاء] سفراء لهذه القيم." },
-            { topic: "العدل والإحسان", quran: "﴿إِنَّ اللَّهَ يَأْمُرُ بِالْعَدْلِ وَالْإِحْسَانِ﴾ [النحل: 90]", hadith: "قال رسول الله ﷺ: “لا يؤمن أحدكم حتى يحب لأخيه ما يحب لنفسه” (متفق عليه).", didYouKnow: "هل تعلم أن الله حرم الظلم على نفسه وجعله بين الناس محرمًا؟", wisdom: "العدل أساس الملك.", morningWord: "مجتمعنا لا ينهض إلا بقيم راسخة: عدلٌ يرد الحقوق، وإحسانٌ يفتح القلوب. فلنكن يا [زملاء] الجيل الذي يرسخ هذه القيم في مدرسته وبيئته." },
-            { topic: "مكارم الأخلاق", quran: "﴿وَإِنَّكَ لَعَلى خُلُقٍ عَظِيمٍ﴾ [القلم: 4]", hadith: "sُئل رسول الله ﷺ عن أكثر ما يدخل الناس الجنة، فقال: “تقوى الله وحسن الخلق”", didYouKnow: "هل تعلم أن حسن الخلق أثقل ما يوضع في ميزان العبد يوم القيامة؟", wisdom: "بالأخلاق الفاضلة تُبنى الأمم العظيمة.", morningWord: "الأخلاق الكريمة ليست مجرد تعاملات، بل هي عبادة نتقرب بها إلى الله. فلنرتقِ بأخلاقنا يا [زملاء]، فالخلق الكريم هو هوية المسلم الحقيقية." },
-            { topic: "التقوى", quran: "﴿يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ حَقَّ تُقَاتِهِ﴾ [آل عمران: 102]", hadith: "قال رسول الله ﷺ: “اتق الله حيثما كنت، وأتبع السيئة الحسنة تمحها”", didYouKnow: "هل تعلم أن التقوى هي وصية الله للأولين والآخرين؟", wisdom: "رأس الحكمة مخافة الله.", morningWord: "التقوى هي مراقبة الله في السر والعلن، وفعل ما أمر واجتناب ما نهى. هي الدرع الذي يحمي الإنسان من فتن الدنيا. فلنجعلها يا [زملاء] شعارنا في كل حين." },
-            { topic: "الإحسان", quran: "﴿وَأَحْسِنُوا إِنَّ اللَّهَ يُحِبُّ الْمُحْسِنِينَ﴾ [البقرة: 195]", hadith: "قال رسول الله ﷺ: “إن الله كتب الإحسان على كل شيء” (رواه مسلم).", didYouKnow: "هل تعلم أن الإحسان هو أن تعبد الله كأنك تراه؟", wisdom: "يد الإحسان أسمى من يد السلطان.", morningWord: "فلنختم أسبوعنا بالإحسان، فهو قمة القيم الإسلامية. أن تحسن في عبادتك لربك، وفي تعاملك مع خلقه، وفي إتقانك لدراستك. الإحسان يجعلك محبوبًا عند الله والناس." },
-            { topic: "أهمية العلم", quran: "﴿اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ﴾ [العلق: 1]", hadith: "قال رسول الله صلى الله عليه وسلم: “طلب العلم فريضة على كل مسلم”", didYouKnow: "هل تعلم أن أول جامعة في العالم هي جامعة القرويين في فاس بالمغرب؟", wisdom: "العلم نور والجهل ظلام.", morningWord: "العلم هو السلاح الذي نواجه به تحديات المستقبل، وهو النور الذي يبدد ظلمات الجهل. فاحرصوا يا [زملاء] على أن تكونوا من طلاب العلم، فبكم تنهض الأمة." },
-            { topic: "احترام المعلم", quran: "﴿يَرْفَعِ اللَّهُ الَّذِينَ آمَنُوا مِنكُمْ وَالَّذِينَ أُوتُوا الْعِلْمَ دَرَجَاتٍ﴾ [المجادلة: 11]", hadith: "قال رسول الله ﷺ: “ليس منا من لم يجل كبيرنا، ويعرف لعالمنا حقه”", didYouKnow: "هل تعلم أن احترام المعلم هو من احترام العلم نفسه؟", wisdom: "قم للمعلم وفّه التبجيلا... كاد المعلم أن يكون رسولا.", morningWord: "[معلمون] هم ورثة الأنبياء، يبذلون وقتهم وجهدهم من أجل مستقبلكم. فاحترامهم وتقديرهم واجب، والاستفادة من علمهم هو طريقكم للتفوق." },
-            { topic: "أهمية القراءة", quran: "﴿ن وَالْقَلَمِ وَمَا يَسْطُرُونَ﴾ [القلم: 1]", hadith: "قال رسول الله ﷺ: “من سلك طريقًا يلتمس فيه علمًا، سهّل الله له به طريقًا إلى الجنة”", didYouKnow: "هل تعلم أن القراءة المنتظمة تحسن من مهارات التركيز والذاكرة؟", wisdom: "القراءة غذاء للعقل كما أن الطعام غذاء للبدن.", morningWord: "القراءة هي نافذة على العالم، تفتح لنا أبواب المعرفة وتمنحنا الفرصة لاستكشاف أفكار وثقافات جديدة. فاجعلوا يا [زملاء] الكتاب صديقكم الدائم." },
-            { topic: "التحصيل الدراسي", quran: "﴿وَقُل رَّبِّ زِدْنِي عِلْمًا﴾ [طه: 114]", hadith: "قال رسول الله صلى الله عليه وسلم: “إن الله يحب إذا عمل أحدكم عملا أن يتقنه”", didYouKnow: "هل تعلم أن التحصيل الدراسي الجيد يفتح لك أبواب الفرص في المستقبل؟", wisdom: "العلم كالنور، يضيء دروب الحياة.", morningWord: "التحصيل الدراسي هو أساس بناء مستقبل مشرق، فهو يعكس مدى اجتهاد الطالب وإصراره. فاجتهدوا يا [زملاء] في دراستكم لتحقيق أحلامكم." },
-            { topic: "المذاكرة الجيدة", quran: "﴿فَاسْأَلُوا أَهْلَ الذِّكْرِ إِن كُنتُمْ لَا تَعْلَمُونَ﴾ [النحل: 43]", hadith: "عن أنس رضى الله عنه أن رسول الله صلى الله عليه وسلم قال: “اللهم لا سهل إلا ما جعلت سهلا, وأنت تجعل الحزن إذا شئت سهلا”", didYouKnow: "هل تعلم أن مراجعة المعلومات بشكل دوري تضمن الاحتفاظ بها لفترة أطول؟", wisdom: "المذاكرة الجيدة هي مفتاح النجاح.", morningWord: "تعتبر المذاكرة الجيدة واحدة من أهم المهارات. وللمذاكرة الجيدة طرق وأساليب مثل تنظيم الوقت، ووضع خطة دراسية، وفهم المادة بشكل عميق." },
-            { topic: "أهمية الرياضة", quran: "﴿وَأَعِدُّوا لَهُم مَّا اسْتَطَعْتُم مِّن قُوَّةٍ﴾ [الأنفال: 60]", hadith: "قال رسول الله ﷺ: “المؤمن القوي خير وأحب إلى الله من المؤمن الضعيف”", didYouKnow: "هل تعلم أن ممارسة الرياضة بانتظام تساعد في تقوية القلب والرئتين؟", wisdom: "العقل السليم في الجسم السليم.", morningWord: "الرياضة ليست مجرد ترفيه، بل هي أسلوب حياة يعزز الصحة البدنية والعقلية. فهي تساهم في تقليل التوتر والقلق، وتزيد من الإنتاجية." },
-            { topic: "التغذية السليمة", quran: "﴿وَكُلُوا وَاشْرَبُوا وَلَا تُسْرِفُوا﴾ [الأعراف: 31]", hadith: "قال رسول الله ﷺ: “ما ملأ آدمي وعاءً شرًا من بطن”", didYouKnow: "هل تعلم أن تناول الإفطار يوميًا يساعد على زيادة الطاقة والتركيز؟", wisdom: "الغذاء الصحي هو استثمار في صحتك المستقبلية.", morningWord: "التغذية السليمة تعني تناول أطعمة متنوعة تزود الجسم بالعناصر الغذائية التي يحتاجها. فلنجعل يا [زملاء] خياراتنا الغذائية أفضل لصحة أفضل." },
-            { topic: "النظافة", quran: "﴿إِنَّ اللَّهَ يُحِبُّ التَّوَّابِينَ وَيُحِبُّ الْمُتَطَهِّرِينَ﴾ [البقرة: 222]", hadith: "قال صلى الله عليه وسلم : “الطهور شطر الإيمان”", didYouKnow: "هل تعلم أن غسل اليدين بشكل صحيح يمكن أن يقلل من الإصابة بالأمراض المعدية بنسبة 50%؟", wisdom: "النظافة من الإيمان.", morningWord: "النظافة ليست مجرد خلو المكان من الأوساخ، بل هي أسلوب حياة يعكس شخصية الفرد. فلنحافظ يا [زملاء] على نظافة فصولنا ومدرستنا." },
-            { topic: "النوم الجيد", quran: "﴿وَجَعَلْنَا نَوْمَكُمْ سُبَاتًا﴾ [النبأ: 9]", hadith: "كانَ رَسُولُ الله صَلَّى الله عليه وسلم إذا أوى إلى فراشه نام عَلَى شَقَهِ الْأَيْمَنِ.", didYouKnow: "هل تعلم أن قلة النوم يمكن أن تؤثر سلبا على الصحة العقلية والجسدية؟", wisdom: "النوم ليس ترفا بل هو ضرورة ملحة للراحة.", morningWord: "النوم الجيد هو جزء أساسي من نمط الحياة الصحي. يحتاج الجسم إلى النوم ليتجدد ويستعيد قوته. فهو يساعد في تحسين الذاكرة وزيادة التركيز." },
-            { topic: "الوقاية من الأمراض", quran: "﴿وَإِذَا مَرِضْتُ فَهُوَ يَشْفِينِ﴾ [الشعراء: 80]", hadith: "قال رسول الله صلى الله عليه وسلم: “لا عدوى ولا طيرة”", didYouKnow: "هل تعلم أن 80% من الأمراض يمكن الوقاية منها من خلال نمط حياة صحي؟", wisdom: "درهم وقاية خير من قنطار علاج.", morningWord: "الوقاية من الأمراض تبدأ من العادات اليومية. فمن المهم أن نتبع نظاما غذائيا صحيًا، ونمارس الرياضة، ونحرص على النظافة الشخصية." },
-            { topic: "الوطن", quran: "﴿رَبِّ اجْعَلْ هَٰذَا بَلَدًا آمِنًا﴾ [البقرة: 126]", hadith: "قال رسول الله صلى الله عليه وسلم: “من حمل علينا السلاح فليس منا”", didYouKnow: "هل تعلم أن الانتماء للوطن هو شعور يولد في قلوبنا منذ الصغر؟", wisdom: "حب الوطن ليس شعورًا فحسب بل هو عمل وعطاء.", morningWord: "الوطن هو الهوية والانتماء، وهو المكان الذي نشأنا فيه. إن حب الوطن ليس مجرد كلمات، بل هو شعور يدفعنا للعمل من أجل رفعته وتقدمه." },
-            { topic: "العمل التطوعي", quran: "﴿وَافْعَلُوا الْخَيْرَ لَعَلَّكُمْ تُفْلِحُونَ﴾ [الحج: 77]", hadith: "قال رسول الله ﷺ: “أحب الناس إلى الله أنفعهم للناس”", didYouKnow: "هل تعلم أن العمل التطوعي يمكن أن يعزز من صحتك النفسية؟", wisdom: "من لم يكن له خير في نفسه، لم يكن له خير في غيره.", morningWord: "العمل التطوعي من أبرز مظاهر التعاون والتكافل. فهو يعكس روح العطاء، حيث يقدم المتطوعون وقتهم وجهودهم لخدمة الآخرين دون مقابل." },
-            { topic: "حق الجار", quran: "﴿وَالْجَارِ ذِي الْقُرْبَىٰ وَالْجَARِ الْجُنُبِ﴾ [النساء: 36]", hadith: "قال رسول الله صلى الله عليه وسلم: “ما زال جبريل يوصيني بالجار حتى ظننت أنه سيورثه”", didYouKnow: "هل تعلم أن حقوق الجار تشمل السلام عليه ومساعدته وعدم إيذائه؟", wisdom: "الجار كالأخ إن لم يكن من النسب فهو من الجوار.", morningWord: "لقد حث الإسلام على حسن الجوار، وجعل العناية بالجار من مظاهر الأخلاق الحميدة. فالجار هو أقرب الناس إلينا في المسكن، وعلينا أن نتعامل معه بمحبة واحترام." },
-            { topic: "احترام الكبير", quran: "﴿وَاخْفِضْ لَهُمَا جَنَاحَ الذُّلِّ مِنَ الرَّحْمَةِ﴾ [الإسراء: 24]", hadith: "قال رسول الله صلى الله عليه وسلم: “ليس منا من لم يرحم صغيرنا، ويُوقر كبيرنا”", didYouKnow: "هل تعلم أن احترام الكبير يعود بالنفع على الفرد والمجتمع؟", wisdom: "من لم يحترم كبيره، لم يحترم صغيره.", morningWord: "إن احترام الكبير ليس مجرد واجب اجتماعي، بل هو سلوك يعبر عن تقديرنا للخبرة والحكمة. الكبار هم آباؤنا وأجدادنا ومعلمونا، ويجب علينا أن نتعلم منهم." },
-            { topic: "الممتلكات العامة", quran: "﴿وَلَا تُفْسِدُوا فِي الْأَرْضِ بَعْدَ إِصْلَاحِهَا﴾ [الأعراف: 56]", hadith: "قال رسول الله ﷺ: “الإيمان بضع وسبعون شعبة، وأدناها إماطة الأذى عن الطريق”", didYouKnow: "هل تعلم أن تلف الممتلكات العامة يكلف الدولة مبالغ ضخمة؟", wisdom: "الممتلكات العامة أمانة في أعقادنا.", morningWord: "تعتبر الممتلكات العامة جزءًا من هوية المجتمع، فهي تعكس حضارتنا. تشمل الحدائق، الشوارع، والمدارس. والمحافظة عليها تعكس وعيًا ومسؤولية." },
-            { topic: "الصداقة", quran: "﴿الْأَخِلَّاءُ يَوْمَئِذٍ بَعْضُهُمْ لِبَعْضٍ عَدُوٌّ إِلَّا الْمُتَّقِينَ﴾ [الزخرف: 67]", hadith: "قال رسول الله ﷺ: “الرجل على دين خليله فلينظر أحدكم من يخالل”", didYouKnow: "هل تعلم أن الصداقة الجيدة تحسن من الصحة النفسية وتقلل من الشعور بالوحدة؟", wisdom: "الصديق الحقيقي هو الذي يراك في أسوأ حالاتك ويظل بجانبك.", morningWord: "الصداقة من أجمل العلاقات التي يعيشها الإنسان. الصديق الحقيقي هو الذي يشاركنا أفراحنا وأحزاننا، ويقدم لنا الدعم. لذا، يجب أن نختار أصدقائنا بعناية." },
-            { topic: "التعاون", quran: "﴿وَتَعَاوَنُوا عَلَى الْبِرِّ وَالتَّقْوَىٰ﴾ [المائدة: 2]", hadith: "قال رسول الله ﷺ: “المؤمن للمؤمن كالبنيان يشد بعضه بعضا”", didYouKnow: "هل تعلم أن التعاون هو أحد أهم القيم الإنسانية التي تساهم في بناء المجتمعات القوية؟", wisdom: "يد واحدة لا تصفق، لكن الأيادي المجتمعة تصنع المعجزات.", morningWord: "التعاون هو الركيزة الأساسية التي تبني المجتمعات. فعندما نتعاون، نعمل كفريق واحد، حيث تتكامل قدراتنا ومهاراتنا، مما يؤدي إلى تحقيق إنجازات أكبر." },
-            { topic: "الأمانة", quran: "﴿إِنَّ اللَّهَ يَأْمُرُكُمْ أَن تُؤَدُّوا الْأَمَانَاتِ إِلَىٰ أَهْلِهَا﴾ [النساء: 58]", hadith: "قال رسول الله ﷺ: “آية المنافق ثلاث: إذا حدث كذب، وإذا وعد أخلف، وإذا اؤتمن خان”", didYouKnow: "هل تعلم أن أداء الأمانة مفتاح الرزق؟", wisdom: "أفضل الأمانة الوفاء بالعهد.", morningWord: "الأمانة صفة جميلة حث عليها الدين. والإنسان الأمين محبوب عند الله وعند الناس. والأمانة أن نصون حواسنا عن الحرام وأن لا نعتدي على حقوق الآخرين." },
-            { topic: "الصدق", quran: "﴿يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَكُونُوا مَعَ الصَّادِقِينَ﴾ [التوبة: 119]", hadith: "قال رسول الله ﷺ: “إن الصدق يهدي إلى البر، وإن البر يهدي إلى الجنة”", didYouKnow: "هل تعلم أن الصدق يورث الطمأنينة في القلب؟", wisdom: "الكذب dاء وصدق الحديث دواء.", morningWord: "الصدق هو أساس العلاقات الصحية، وهو ما يجعلنا نعيش بطمأنينة وراحة نفسية. لنجعل من الصدق سلوكا نمارسه في حياتنا اليومية، ولنحرص على أن نكون دائما صادقين." },
-            { topic: "الوفاء بالعهد", quran: "﴿وَأَوْفُوا بِالْعَهْدِ ۖ إِنَّ الْعَهْدَ كَانَ مَسْئُولًا﴾ [الإسراء: 34]", hadith: "قال رسول الله ﷺ: “أربع من كن فيه كان منافقا خالصا... وإذا عاهد غدر”", didYouKnow: "هل تعلم أن الوفاء بالعهد من صفات الأنبياء والمرسلين؟", wisdom: "الوفاء من شيم الكرام والغدر من صفات اللئام.", morningWord: "الوفاء بالعهد من علامات الصادقين المتقين. وإنك لو نظرت إلى واقعنا اليوم، ستجد كم من الناس من يعد، ولكن أين الوفاء بالعهود؟ فلنتخلق بهذا الخلق العظيم." },
-            { topic: "الصبر", quran: "﴿إِنَّ اللَّهَ مَعَ الصَّابِرِينَ﴾ [البقرة: 153]", hadith: "قال النبي صلى الله عليه وسلم: “ما يُصيبُ المُسلِمَ مِن نَصَبٍ ولا وَصَبٍ... إلا كَفَرَ اللهُ بِها مِن خَطاياه”", didYouKnow: "هل تعلم أن الصبر عند المصيبة يسمى إيماناً؟", wisdom: "الصبر شجرة جذورها مرة وثمارها شهية.", morningWord: "تمر بالإنسان أوقات عصيبة، لا يستطيع فيها فعل شيء. ولكنه ينسى شيئًا فعله قبله الأنبياء، ألا وهو الصبر. فالصبر عند المصائب واجب، وهو سبب لتكفير الذنوب." },
-            { topic: "التفاؤل", quran: "﴿لَا تَقْنَطُوا مِن رَّحْمَةِ اللَّهِ﴾ [الزمر: 53]", hadith: "قال النبي صلى الله عليه وسلم: “ويعجبني الفأل الصالح الكلمة الحسنة”", didYouKnow: "هل تعلم أن التفاؤل فن تصنعه النفوس الواثقة بفرج الله؟", wisdom: "الثقة بالله أزكى أمل، والتوكل عليه أوفى عمل.", morningWord: "التفاؤل هو نور وقت شدة الظلمات، ومخرج وقت اشتداد الأزمات. وهذا ما حصل مع رسول الله صلى الله عليه وسلم عندما تفاءل وتعلق بربه؛ فجعل الله له من كل كرب فرجاً ومخرجاً." },
-            { topic: "الابتسامة", quran: "﴿فَتَبَسَّمَ ضَاحِكًا مِّن قَوْلِهَا﴾ [النمل: 19]", hadith: "قال رسول الله صلى الله عليه وسلم: “تبسمك في وجه أخيك لك صدقة”", didYouKnow: "هل تعلم أن الابتسامة تساهم في إفراز هرمونات السعادة؟", wisdom: "الابتسامة هي اللغة العالمية التي يفهمها الجميع.", morningWord: "الابتسامة هي لغة عالمية، وهي تعبير بسيط يمكن أن يغير يوم شخص آخر. إنها ليست مجرد حركة شفتين، بل هي شعور ينعكس على الوجه ويعبر عن الفرح والود." },
-            { topic: "صلة الرحم", quran: "﴿وَاتَّقُوا اللَّهَ الَّذِي تَسَاءَلُونَ بِهِ وَالْأَرْحَامَ﴾ [النساء: 1]", hadith: "قال رسول الله ﷺ: “من أحب أن يبسط له في رزقه، وينسأ له في أثره فليصل رحمه”", didYouKnow: "هل تعلم أن صلة الرحم تؤثر إيجابيًا على الصحة النفسية؟", wisdom: "صلة الرحم جسر من المحبة يربط بين القلوب.", morningWord: "صلة الرحم تعني الحفاظ على الروابط العائلية والتواصل مع الأقارب. وقد حثنا ديننا الحنيف على أهميتها، حيث أنها من أسباب إطالة العمر والبركة في الرزق." },
-            { topic: "الرفق", quran: "﴿فَبِمَا رَحْمَةٍ مِّنَ اللَّهِ لِنتَ لَهُمْ﴾ [آل عمران: 159]", hadith: "قال رسول الله ﷺ: “إن الرفق لا يكون في شيء إلا زانه، ولا ينزع من شيء إلا شانه”", didYouKnow: "هل تعلم أن الأشخاص الذين يمارسون الرفق يتمتعون بصحة نفسية أفضل؟", wisdom: "الرفق هو مفتاح القلوب.", morningWord: "الرفق هو سلوك يدعو إلى اللين والرحمة في التعامل مع الآخرين، وهو قيمة عظيمة. الرفق لا يقتصر على التعامل مع البشر فقط، بل يمتد ليشمل الحيوانات والبيئة." },
-            { topic: "الحفاظ على البيئة", quran: "﴿وَلَا تُفْسِدُوا فِي الْأَرْضِ بَعْدَ إِصْلَاحِهَا﴾ [الأعراف: 56]", hadith: "قال رسول الله ﷺ: “إذا قامت الساعة وفي يد أحدكم فسيلة، فليغرسها”", didYouKnow: "هل تعلم أن 90% من النفايات التي ننتجها يمكن إعادة تدويرها؟", wisdom: "الأرض ليست ميراثاً من آبائنا ولكن أمانة في أعقادنا.", morningWord: "الحفاظ على البيئة هو مسؤولية جماعية. يجب علينا جميعًا أن نكون حراسًا لهذه الأرض. من خلال تقليل النفايات، وإعادة التدوير، وزراعة الأشجار، يمكننا أن نساهم في حماية بيئتنا." },
-            { topic: "نعمة الماء", quran: "﴿وَجَعَلْنَا مِنَ الْمَاءِ كُلَّ شَيْءٍ حَيٍّ﴾ [النبياء: 30]", hadith: "عن رجل سقى كلباً، فشكر الله له فغفر له.", didYouKnow: "هل تعلم أن الماء يغطي حوالي 71% من سطح الأرض، ولكن فقط 2.5% منها مياه عذبة؟", wisdom: "الماء سر الحياة، وبدونه لا تستقيم حياة.", morningWord: "الماء هو مصدر الحياة، فهو يروي عطشنا، ويساعد في نمو النباتات. لكن علينا أن نكون واعين بأهمية المحافظة على هذه النعمة، فالاستخدام المفرط للماء أو هدره يسبب مشكلات كبيرة." },
-            { topic: "الزراعة", quran: "﴿أَفَرَأَيْتُم مَّا تَحْرُثُونَ * أَأَنتُمْ تَزْرَعُونَهُ أَمْ نَحْنُ الزَّارِعُونَ﴾ [الواقعة: 63-64]", hadith: "قال رسول الله ﷺ: “ما من مسلم يغرس غرسا، أو يزرع زرعا، فيأكل منه طير أو إنسان أو بهيمة، إلا كان له به صدقة”", didYouKnow: "هل تعلم ان الزراعة هي بداية كل عمليات الإنتاج في الحياة الإنسانية؟", wisdom: "من جد وجد ومن زرع حصد.", morningWord: "تعتبر البيئة الزراعية المعلم الأول للإنسان. ومنها تبلورت المبادئ الخلقية التي قامت على أساسها المجتمعات المتقدمة حضارياً." },
-            { topic: "ترشيد الاستهلاك", quran: "﴿وَالَّذِينَ إِذَا أَنفَقُوا لَمْ يُسْرِفُوا وَلَمْ يَقْتُرُوا﴾ [الفرقان: 67]", hadith: "قال رسول الله ﷺ: “إن الله كره لكم ثلاثا: قيل وقال، وإضاعة المال، وكثرة السؤال”", didYouKnow: "هل تعلم أن صنبور المياه الذي يسرب قطرة كل ثانية، يستهلك 103 لتر من الماء في السنة؟", wisdom: "البخيل يسرق نفسه والمسرف يسرق الآخرين.", morningWord: "يُعد الترشيد ركيزة من الركائز الاجتماعية المهمة. ولا يهدف الترشيد للتقتير، إنما يُعرف بأنه الاستعمال الراشد للأمور، أي استعمالها بشكل عقلاني." },
-            { topic: "نعمة المطر", quran: "﴿وَأَنزَلْنَا مِنَ الْمَعْصِرَاتِ مَاءً ثَجَّاجًا﴾ [النبأ: 14]", hadith: "كان رسول الله ﷺ إذا رأى المطر قال: “اللهم صيباً نافعاً”", didYouKnow: "هل تعلم أن للمطر درجات ولكل درجة اسم، منها الرذاذ، والطل، والغيث، والهطل، والوابل؟", wisdom: "بعد العاصفة يأتي المطر وبعد الغيوم تشرق الشمس.", morningWord: "المطر هو نعمة من نعم الله التي من علينا بها، والتي تبث الحياة في الكائنات على اختلافها. وهو من أساسيات وجود الماء على سطح الكرة الأرضية." },
-            { topic: "إدارة الوقت", quran: "﴿وَهُوَ الَّذِي جَعَلَ اللَّيْلَ وَالنَّهَارَ خِلْفَةً لِّمَنْ أَرَادَ أَن يَذَّكَّرَ أَوْ أَرَادَ شُكُورًا﴾ [الفرقان: 62]", hadith: "قال النبي ﷺ: “نعمتان مغبون فيهما كثير من الناس الصحة والفراغ”", didYouKnow: "هل تعلم أن التخطيط الجيد لليوم التالي قبل النوم يمكن أن يساعدك على تحقيق المزيد؟", wisdom: "الوقت هو الحياة، فإذا ضيعت وقتك، فقد ضيعت حياتك.", morningWord: "إدارة الوقت هي فن يهدف إلى تنظيم واستثمار الوقت بشكل فعال. إن الوقت هو أثمن ما يملك الإنسان، لذا فإن إدارته بشكل جيد تعكس مدى احترامنا لأنفسنا." },
-            { topic: "الثقة بالذات", quran: "﴿وَلَقَدْ كَرَّمْنَا بَنِي آدَمَ﴾ [الإسراء: 70]", hadith: "قال النبي ﷺ: “أحب الأعمال إلى الله أدومها وإن قل”", didYouKnow: "هل تعلم أن الأشخاص الذين يتمتعون بثقة عالية بالنفس يميلون إلى تحقيق أهدافهم بشكل أفضل؟", wisdom: "الثقة بالذات هي أول سر من أسرار النجاح.", morningWord: "الثقة بالذات هي الإيمان بقدراتنا ومهاراتنا، وهي المفتاح لتحقيق النجاح. عندما نثق بأنفسنا، نكون أكثر قدرة على مواجهة التحديات وتحقيق الأهداف." },
-            { topic: "الاستماع الجيد", quran: "﴿وَإِذَا قُرِئَ الْقُرْآنُ فَاسْتَمِعُوا لَهُ وَأَنصِتُوا لَعَلَّكُمْ تُرْحَمُونَ﴾ [الأعراف: 204]", hadith: "قال رسول الله ﷺ: “إذا قلت للناس: أنْصِتُوا وهم يتكلمون، فقد ألغيت على نفسك”", didYouKnow: "هل تعلم أن الاستماع الجيد يُعتبر مهارة يمكن تطويرها؟", wisdom: "الاستماع الجيد نصف الحديث.", morningWord: "إن الاستماع الجيد لا يعني فقط سماع الكلمات، بل يعني فهم المعاني والمشاعر. عندما نستمع جيدا، نعبر عن احترامنا للمتحدث ونظهر له أننا نهتم برأيه." },
-            { topic: "التعامل مع الفشل", quran: "﴿وَعَسَىٰ أَن تَكْرَهُوا شَيْئًا وَهُوَ خَيْرٌ لَّكُمْ﴾ [البقرة: 216]", hadith: "قال النبي ﷺ: “من يرد الله به خيرا يفقهه في الدين”", didYouKnow: "هل تعلم أن توماس إديسون فشل أكثر من 1000 مرة قبل أن ينجح في اختراع المصباح الكهربائي؟", wisdom: "الفشل هو ببساطة فرصة للبدء من جديد، هذه المرة بذكاء أكبر.", morningWord: "الفشل هو جزء لا يتجزأ من رحلة النجاح. من المهم أن ندرك أن الفشل ليس نهاية الطريق، بل هو درس يمكن أن يعلمنا الكثير. يجب أن نراه كخطوة نحو النجاح." },
-            { topic: "تطوير الذات", quran: "﴿إِنَّ اللَّهَ لَا يُغَيِّرُ مَا بِقَوْمٍ حَتَّىٰ يُغَيِّرُوا مَا بِأَنفُсِهِمْ﴾ [الرعد: 11]", hadith: "قال رسول الله صلى الله عليه وسلم: “إن الله يحب إذا عمل أحدكم عملا أن يتقنه”", didYouKnow: "هل تعلم أن تطوير الذات يمكن أن يساعدك في تحسين علاقاتك مع الآخرين؟", wisdom: "من لا يتقدم يتقادم ومن لا يسعى إلى تطوير ذاته يسبقه الآخرون.", morningWord: "تطوير الذات هو عملية مستمرة تهدف إلى تحسين القدرات والمهارات الشخصية. إنه يتعلق بالوعي الذاتي، حيث نحتاج إلى فهم نقاط قوتنا وضعفنا، واستغلال الفرص لتعلم شيء جديد." },
-            { topic: "بر الوالدين", quran: "﴿وَقَضَىٰ رَبُّكَ أَلَّا تَعْبُدُوا إِلَّا إِيَّاهُ وَبِالْوَالِدَيْنِ إِحْسَانًا﴾ [الإسراء: 23]", hadith: "قال رسول الله ﷺ: “رضا الرب في رضا الوالد، وسخط الرب في سخط الوالد”", didYouKnow: "هل تعلم أن بر الوالدين من أحب الأعمال إلى الله بعد الصلاة على وقتها؟", wisdom: "بروا آباءكم تبركم أبناؤكم.", morningWord: "بر الوالدين ليس مجرد طاعة، بل هو مفتاح التوفيق والبركة في الحياة. فاحرصوا يا [زملاء] على إرضائهما في كل حين، فهما بابكم إلى الجنة." },
-            { topic: "الابتكار والإبداع", quran: "﴿صُنْعَ اللَّهِ الَّذِي أَتْقَنَ كُلَّ شَيْءٍ﴾ [النمل: 88]", hadith: "قال رسول الله ﷺ: “إن الله يحب إذا عمل أحدكم عملاً أن يتقنه”", didYouKnow: "هل تعلم أن العديد من الاختراعات الكبيرة بدأت كأفكار بسيطة في عقول مبتكرين؟", wisdom: "الإبداع هو رؤية ما لا يراه الآخرون.", morningWord: "الابتكار والإبداع هما مفتاحا التقدم. إن القدرة على التفكير خارج الصندوق وتقديم أفكار جديدة يساهم في حل المشكلات وتحقيق التغيير الإيجابي." },
-            { topic: "اللغة العربية", quran: "﴿إِنَّا أَنزَلْنَاهُ قُرْآنًا عَرَبِيًّا لَّعَلَّكُمْ تَعْقِلُونَ﴾ [يوسف: 2]", hadith: "قال عمر بن الخطاب رضي الله عنه: “تعلموا العربية فإنها من دينكم”", didYouKnow: "هل تعلم أن اللغة العربية من أكثر اللغات انتشارًا في العالم، ويتحدث بها أكثر من 460 مليون شخص؟", wisdom: "اللغة العربية ليست مجرد كلمات، بل هي تاريخ وحضارة.", morningWord: "تعتبر اللغة العربية لغة القرآن الكريم، وهي تعبر عن هويتنا وثقافتنا. فلنحرص جميعًا يا [زملاء] على تعلمها والتحدث بها بكل فخر." },
-            { topic: "مكافحة الفساد", quran: "﴿وَلَا تَبْخَسُوا النَّاسَ أَشْيَاءَهُمْ وَلَا تَعْثَوْا فِي الْأَرْضِ مُفْسِدِينَ﴾ [هود: 85]", hadith: "قال رسول الله ﷺ: “لعن الله الراشي والمرتشي”", didYouKnow: "هل تعلم أن الفساد يكبد الاقتصاد العالمي تريليونات الدولارات سنويا؟", wisdom: "الفساد هو عدو التنمية، والنزاهة هي مفتاح النجاح.", morningWord: "الفساد سلوك يتسم بعدم النزاهة، ويؤدي إلى تدهور المجتمعات. إن مكافحة الفساد تتطلب جهودا جماعية لتعزيز قيم النزاهة والشفافية في حياتنا." },
-            { topic: "المحافظة على الكتب", quran: "﴿اقْرَأْ وَرَبُّكَ الْأَكْرَمُ * الَّذِي عَلَّمَ بِالْقَلَمِ﴾ [العلق: 3-4]", hadith: "قال رسول الله ﷺ: “وَمَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا، سَهَّلَ اللَّهُ لَهُ طَرِيقًا إِلَى الْجَنَّةِ”", didYouKnow: "هل تعلم أن الكتاب هو أحد أقدم وسائل المعرفة التي استخدمها الإنسان؟", wisdom: "الكتاب هو صديق الإنسان الوفي، فاهتم به.", morningWord: "إن الكتب ليست مجرد أوراق، بل هي جسر يربطنا بالعالم. فهي تحتوي على أفكار وتجارب إنسانية. لذا، يجب علينا يا [زملاء] أن نحافظ عليها من التلف والإهمال." },
-            { topic: "النجاح", quran: "﴿وَقُلِ اعْمَلُوا فَسَيَرَى اللَّهُ عَمَلَكُمْ وَرَسُولُهُ وَالْمُؤْمِنُونَ﴾ [التوبة: 105]", hadith: "قال رسول الله ﷺ: “إن الله يحب إذا عمل أحدكم عملا أن يتقنه”", didYouKnow: "هل تعلم أن النجاح يتطلب الصبر والمثابرة؟ فالكثير من الناجحين واجهوا الفشل قبل أن ينجحوا.", wisdom: "لا تقس نجاحك بما حققه الآخرون بل بما حققته أنت.", morningWord: "النجاح ليس مجرد الوصول إلى هدف، بل هو رحلة مليئة بالتحديات والتعلم. الأهم هو أن نؤمن بأن النجاح ليس نهاية المطاف، بل هو بداية جديدة." },
-            { topic: "الاستعداد للاختبارات", quran: "﴿وَقُل رَّبِّ زِدْنِي عِلْمًا﴾ [طه: 114]", hadith: "قال النبي ﷺ: “اللهم لا سهل إلا ما جعلته سهلا, وأنت تجعل الحزن إذا شئت سهلا”", didYouKnow: "هل تعلم أن أخذ قسط كافٍ من النوم ليلة الاختبار يساعد على التركيز؟", wisdom: "الاستعداد الجيد نصف النجاح.", morningWord: "الاختبار ليس غاية، بل هو وسيلة لقياس ما تعلمتموه. تعاملوا معه بهدوء وثقة. اقرأوا الأسئلة بتمعن، وابدأوا بالأسهل. أنتم قادرون على تحقيق أفضل النتائج." },
-            { topic: "الرضا بالنتائج", quran: "﴿وَعَسَىٰ أَن تَكْرَهُوا شَيْئًا وَهُوَ خَيْرٌ لَّكُمْ﴾ [البقرة: 216]", hadith: "قال رسول الله ﷺ: “عجبًا لأمر المؤمن، إن أمره كله خير...”", didYouKnow: "هل تعلم أن أعظم المخترعين واجهوا الفشل مرارًا قبل النجاح؟", wisdom: "النجاح الحقيقي هو ألا تتوقف عن المحاولة.", morningWord: "النتيجة هي ثمرة جهدك وتقدير الله لك. إن تفوقت فاحمد الله وتواضع، وإن كانت أقل من توقعاتك فاصبر ولا تيأس، وتعلم من أخطائك لتكون أقوى." },
-            { topic: "شكر وتقدير", quran: "﴿لَئِنْ شَكَرْتُمْ لَأَزِيدَنَّكُمْ﴾ [إبراهيم: 7]", hadith: "قال رسول الله ﷺ: “من لا يشكر الناس لا يشكر الله”", didYouKnow: "هل تعلم أن التعبير عن الامتنان يقوي الروابط الاجتماعية؟", wisdom: "الاعتراف بالجميل شيمة الأوفياء.", morningWord: "كلمة شكرًا لا تكلف شيئًا لكنها تعني الكثير. فلنشكر الله أولاً، ثم والدينا، ومعلمينا، وزملائنا. الشكر يفتح أبواب المحبة والبركة." },
-            { topic: "إجازة سعيدة", quran: "﴿فَإِذَا فَرَغْتَ فَانْصَبْ﴾ [الشرح: 7]", hadith: "قال النبي ﷺ: “روحوا القلوب ساعة فساعة”", didYouKnow: "هل تعلم أن قضاء وقت مفيد في الإجازة يجدد الطاقة الذهنية والجسدية؟", wisdom: "النفس تمل كما تمل الأبدان، فابتغوا لها طرائف الحكمة.", morningWord: "الإجازة فرصة للراحة وتجديد النشاط، وفرصة لصلة الأرحام، وممارسة الهوايات. استثمروها يا [زملاء] فيما هو نافع وممتع، وعودوا إلينا بكل شوق وهمة." },
-            { topic: "اليوم الوطني", quran: "﴿رَبِّ اجْعَلْ هَٰذَا الْبَلَدَ آمِنًا وَاجْنُبْنِي وَبَنِيَّ أَن نَّعْبُدَ الْأَصْنَامَ﴾ [إبراهيم: 35]", hadith: "قال رسول الله ﷺ وهو يودع وطنه مكة: “ما أطيبك من بلد! وما أحبك إليَّ ولولا أن قومي أخرجوني منك، ما سكنتُ غيرك”", didYouKnow: "هل تعلم أن حب الوطن والانتماء إليه غريزة فطرية لدى الإنسان؟", wisdom: "وطن لا نحميه لا نستحق العيش فيه.", morningWord: "اليوم الوطني ليس مجرد احتفال، بل هو تجديد للولاء والانتماء، وفرصة لنستذكر أمجاد الماضي ونعمل من أجل مستقبل أكثر إشراقًا لوطننا الغالي." },
-            { topic: "اليوم العالمي للغة العربية", quran: "﴿إِنَّا أَنزَلْنَاهُ قُرْآنًا عَرَبِيًّا لَّعَلَّكُمْ تَعْقِلُونَ﴾ [يوسف: 2]", hadith: "قال عمر بن الخطاب رضي الله عنه: “تعلموا العربية فإنها من دينكم، وتعلموا الفرائض فإنها من دينكم”", didYouKnow: "هل تعلم أن اللغة العربية يتحدث بها أكثر من 467 مليون نسمة حول العالم؟", wisdom: "اللغة العربية هي هوية وتاريخ وحضارة.", morningWord: "لغتنا العربية هي كنز ثمين، فهي لغة القرآن الكريم وجسر يربطنا بتاريخنا وثقافتنا العريقة. فلنعتز بها ونتحدث بها ونحافظ عليها يا [زملاء]." },
-            { topic: "اليوم العالمي لذوي الإعاقة", quran: "﴿لَيْస్َ عَلَى الْأَعْمَىٰ حَرَجٌ وَلَا عَلَى الْأَعْرَجِ حَرَجٌ وَلَا عَلَى الْمَرِيضِ حَرَجٌ﴾ [النور: 61]", hadith: "قال رسول الله ﷺ: “إن الله لا ينظر إلى صوركم وأموالكم، ولكن ينظر إلى قلوبكم وأعمالكم”", didYouKnow: "هل تعلم أن الإعاقة ليست عجزًا، بل هي دافع للتميز والإبداع في كثير من الأحيان؟", wisdom: "القوة الحقيقية ليست في الجسد، بل في قوة الإرادة.", morningWord: "ذوو الإعاقة هم جزء لا يتجزأ من مجتمعنا، يمتلكون قدرات وطاقات هائلة. واجبنا هو دعمهم وتقديرهم وتوفير كل السبل لهم ليشاركوا بفعالية في بناء الوطن." },
-            { topic: "اليوم العالمي للتسامح", quran: "﴿وَالْكَاظِمِينَ الْغَيْظَ وَالْعَافِينَ عَنِ النَّاسِ ۗ وَاللَّهُ يُحِبُّ الْمُحْسِنِينَ﴾ [آل عمران: 134]", hadith: "قال رسول الله ﷺ: “وما زاد الله عبدًا بعفوٍ إلا عزًّا”", didYouKnow: "هل تعلم أن التسامح يحرر الإنسان من مشاعر الحقد والكراهية ويجلب له السلام الداخلي؟", wisdom: "النفوس الكبيرة وحدها تعرف كيف تسامح.", morningWord: "التسامح ليس ضعفًا، بل هو قمة القوة الأخلاقية. إنه يعني أن نتجاوز أخطاء الآخرين ونفتح صفحة جديدة. بالتسامح نبني مجتمعًا أكثر محبة وترابطًا." },
-            { topic: "الذكاء الاصطناعي", quran: "﴿وَعَلَّمَ آدَمَ الْأَسْمَاءَ كُلَّهَا﴾ [البقرة: 31]", hadith: "قال رسول الله ﷺ: “إن الله يحب إذا عمل أحدكم عملاً أن يتقنه”", didYouKnow: "هل تعلم أن الذكاء الاصطناعي يساعد في تشغيل المساعدات الصوتية في هواتفنا مثل سيري ومساعد جوجل؟", wisdom: "الذكاء الاصطناعي هو كهرباء القرن الحادي والعشرين.", morningWord: "الذكاء الاصطناعي هو محاولة لمحاكاة الذكاء البشري في الآلات. إنه أداة قوية تساعدنا في حل المشكلات المعقدة في الطب والهندسة وغيرها، وعلينا أن نحرص على استخدامه فيما ينفع البشرية." },
-            { topic: "الأمن السيبراني", quran: "﴿يَا أَيُّهَا الَّذِينَ آمَنُوا اجْتَنِبُوا كَثِيرًا مِّنَ الظَّنِّ إِنَّ بَعْضَ الظَّنِّ إِثْمٌ ۖ وَلَا تَجَسَّسُوا﴾ [الحجرات: 12]", hadith: "قال رسول الله ﷺ: “المسلم من سلم المسلمون من لسانه ويده”", didYouKnow: "هل تعلم أن استخدام كلمة مرور قوية ومختلفة لكل حساب هو خط الدفاع الأول ضد الاختراق؟", wisdom: "الوقاية في العالم الرقمي تبدأ بكلمة مرور قوية.", morningWord: "في عالمنا الرقمي، أصبح الأمن السيبراني ضرورة لحماية معلوماتنا الشخصية. فلنكن يا [زملاء] مواطنين رقميين مسؤولين، نحافظ على خصوصيتنا ولا نضغط على الروابط المشبوهة." }
+            { topic: "الانضباط المدرسي", quran: "﴿وَأَنْ لَيْسَ لِلْإِنْسَانِ إِلَّا مَا سَعَىٰ، وَأَنَّ سَعْيَهُ سَوْفَ يُرَىٰ﴾ (النجم: 39-40).", hadith: "قال رسول الله صلى الله عليه وسلم: “مَن سلَك طريقًا يلتمس فيه علمًا، سهَّل الله له طريقًا إلى الجنَّة...”", didYouKnow: "هل تعلم أن الطلاب الذين يحافظون على الحضور المنتظم يحققون درجات أفضل من غيرهم؟", wisdom: "الوقت كالسيف إن لم تقطعه قطعك.", morningWord: "يعتبر الانضباط المدرسي هو أحد أفضل السلوكيات الإيجابية التي يجب أن يتحلى بها جميع الطلاب. وقامت مدرستنا بوضع قواعد يأتي في مقدمتها الانتظام في الحضور وعدم الغياب إلا للضرورة القصوى." }
         ];
 
         // --- DOM ELEMENTS ---
@@ -410,36 +357,32 @@
         const topicSelect = document.getElementById('topic');
         const dateInput = document.getElementById('broadcast-date-input');
 
-        // Manual Mode
+        // Manual Mode (Dynamic)
         const savedBroadcastsSelect = document.getElementById('saved-broadcasts-select');
         const loadManualBtn = document.getElementById('load-manual-btn');
         const deleteManualBtn = document.getElementById('delete-manual-btn');
         const saveManualBtn = document.getElementById('save-manual-btn');
         const manualBroadcastNameInput = document.getElementById('manual-broadcast-name');
-        const manualIntroConclusionInput = document.getElementById('manual-intro-conclusion');
-        const manualQuranInput = document.getElementById('manual-quran');
-        const manualHadithInput = document.getElementById('manual-hadith');
-        const manualDidYouKnowInput = document.getElementById('manual-did-you-know');
-        const manualWisdomInput = document.getElementById('manual-wisdom');
-        const manualMorningWordInput = document.getElementById('manual-morning-word');
         
         // Names Modal
         const namesModal = document.getElementById('names-modal');
         const closeModalButton = document.getElementById('close-modal-button');
         const saveNamesButton = document.getElementById('save-names-button');
-        const namePresenterInput = document.getElementById('name-presenter');
-        const nameQuranInput = document.getElementById('name-quran');
-        const nameHadithInput = document.getElementById('name-hadith');
-        const nameMorningWordInput = document.getElementById('name-morning-word');
-        const nameDidYouKnowInput = document.getElementById('name-did-you-know');
-        const nameWisdomInput = document.getElementById('name-wisdom');
-
-        // --- STATE ---
-        let studentNames = { presenter: '', quran: '', hadith: '', morningWord: '', didYouKnow: '', wisdom: '' };
-        let currentManualBroadcast = {};
 
 
-        // --- FUNCTIONS ---
+        // --- STATE VARIABLES ---
+        let studentNames = {}; // Object to hold dynamic names based on ID
+        let currentManualSections = []; // Array to hold the dynamic sections
+
+        // Initial default sections for manual mode
+        const defaultManualSections = [
+            { id: 'sec-intro', title: 'المقدمة والخاتمة', content: '', isRemovable: false },
+            { id: 'sec-quran', title: 'القرآن الكريم', content: '', isRemovable: true },
+            { id: 'sec-hadith', title: 'الحديث الشريف', content: '', isRemovable: true },
+            { id: 'sec-wisdom', title: 'حكمة اليوم', content: '', isRemovable: true },
+            { id: 'sec-word', title: 'كلمة الصباح', content: '', isRemovable: true }
+        ];
+
 
         // --- AUTOMATIC MODE FUNCTIONS ---
         function populateSelectors() {
@@ -492,8 +435,8 @@
                 }).format(adjustedDate);
                 broadcastDateDisplay.textContent = hijriDate;
 
-                const intro = `بسم الله الرحمن الرحيم، والصلاة والسلام على أشرف الأنبياء والمرسلين سيدنا محمد صلى الله عليه وسلم أما بعد، [مدير]، [معلمون]، [طلاب]، يسرنا أن نقدم لكم إذاعتنا لهذا اليوم (${hijriDate}) وهي بعنوان (${broadcastData.topic}). وخير ما نبدأ به فقراتنا هو القرآن الكريم مع ${presenterWord} <span class="student-name">${studentNames.quran || placeholder}</span>، ثم الحديث الشريف مع ${presenterWord} <span class="student-name">${studentNames.hadith || placeholder}</span>، ثم فقرة هل تعلم مع ${presenterWord} <span class="student-name">${studentNames.didYouKnow || placeholder}</span>، ثم حكمة اليوم مع ${presenterWord} <span class="student-name">${studentNames.wisdom || placeholder}</span>، وأخيراً كلمة الصباح مع ${presenterWord} <span class="student-name">${studentNames.morningWord || placeholder}</span>.`;
-                const conclusion = `إلى هنا نكون وصلنا إلى نهاية برنامجنا الإذاعي، تحدثنا فيه عن ${broadcastData.topic}، سائلين الله لنا ولكم التوفيق والسداد. والسلام عليكم ورحمة الله وبركاته، كان معكم ${presenterWord}: <span class="student-name">${studentNames.presenter || placeholder}</span>`;
+                const intro = `بسم الله الرحمن الرحيم، والصلاة والسلام على أشرف الأنبياء والمرسلين سيدنا محمد صلى الله عليه وسلم أما بعد، [مدير]، [معلمون]، [طلاب]، يسرنا أن نقدم لكم إذاعتنا لهذا اليوم (${hijriDate}) وهي بعنوان (${broadcastData.topic}). وخير ما نبدأ به فقراتنا هو القرآن الكريم مع ${presenterWord} <span class="student-name">${studentNames['quran'] || placeholder}</span>، ثم الحديث الشريف مع ${presenterWord} <span class="student-name">${studentNames['hadith'] || placeholder}</span>، ثم فقرة هل تعلم مع ${presenterWord} <span class="student-name">${studentNames['didYouKnow'] || placeholder}</span>، ثم حكمة اليوم مع ${presenterWord} <span class="student-name">${studentNames['wisdom'] || placeholder}</span>، وأخيراً كلمة الصباح مع ${presenterWord} <span class="student-name">${studentNames['morningWord'] || placeholder}</span>.`;
+                const conclusion = `إلى هنا نكون وصلنا إلى نهاية برنامجنا الإذاعي، تحدثنا فيه عن ${broadcastData.topic}، سائلين الله لنا ولكم التوفيق والسداد. والسلام عليكم ورحمة الله وبركاته، كان معكم ${presenterWord}: <span class="student-name">${studentNames['presenter'] || placeholder}</span>`;
                 
                 const paragraphs = [
                     { title: 'المقدمة والخاتمة', content: `<p>${processGenderText(intro, selectedGender)}</p><p class="mt-4">${processGenderText(conclusion, selectedGender)}</p>` },
@@ -509,8 +452,89 @@
                 broadcastContent.innerHTML = '<p class="text-red-500">عذرًا، لا توجد بيانات لهذه الإذاعة.</p>';
             }
         }
-        
-        // --- MANUAL MODE FUNCTIONS ---
+
+        // --- MANUAL MODE (DYNAMIC) FUNCTIONS ---
+
+        function initManualEditor() {
+            if (currentManualSections.length === 0) {
+                currentManualSections = JSON.parse(JSON.stringify(defaultManualSections));
+            }
+            renderManualEditor();
+        }
+
+        function renderManualEditor() {
+            const container = document.getElementById('manual-sections-container');
+            container.innerHTML = '';
+
+            currentManualSections.forEach((section, index) => {
+                const div = document.createElement('div');
+                div.className = 'section-card';
+                
+                // Controls
+                const isFirst = index === 0;
+                const isLast = index === currentManualSections.length - 1;
+                
+                let controlsHtml = `<div class="section-controls">`;
+                if (!isFirst) controlsHtml += `<button onclick="moveSection(${index}, -1)" class="control-btn btn-up" title="تحريك لأعلى">⬆</button>`;
+                if (!isLast) controlsHtml += `<button onclick="moveSection(${index}, 1)" class="control-btn btn-down" title="تحريك لأسفل">⬇</button>`;
+                if (section.isRemovable !== false) controlsHtml += `<button onclick="deleteSection(${index})" class="control-btn btn-delete" title="حذف الفقرة">🗑️</button>`;
+                controlsHtml += `</div>`;
+
+                div.innerHTML = `
+                    ${controlsHtml}
+                    <div>
+                        <label class="block text-xs text-gray-500 mb-1">عنوان الفقرة</label>
+                        <input type="text" value="${section.title}" onchange="updateSection(${index}, 'title', this.value)" class="section-title-input" placeholder="عنوان الفقرة">
+                    </div>
+                    <div class="mt-2">
+                        <label class="block text-xs text-gray-500 mb-1">محتوى الفقرة</label>
+                        <textarea rows="3" onchange="updateSection(${index}, 'content', this.value)" class="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400" placeholder="اكتب المحتوى هنا...">${section.content}</textarea>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Exposed globally for onclick usage
+        window.updateSection = function(index, field, value) {
+            currentManualSections[index][field] = value;
+            // Optionally auto-update preview
+            // displayManualBroadcast({ type: 'dynamic', sections: currentManualSections });
+        };
+
+        window.moveSection = function(index, direction) {
+            const newIndex = index + direction;
+            if (newIndex >= 0 && newIndex < currentManualSections.length) {
+                const temp = currentManualSections[index];
+                currentManualSections[index] = currentManualSections[newIndex];
+                currentManualSections[newIndex] = temp;
+                renderManualEditor();
+            }
+        };
+
+        window.deleteSection = function(index) {
+            if (confirm('هل أنت متأكد من حذف هذه الفقرة؟')) {
+                currentManualSections.splice(index, 1);
+                renderManualEditor();
+            }
+        };
+
+        function addNewSection() {
+            const newId = 'sec-' + Date.now();
+            currentManualSections.push({
+                id: newId,
+                title: 'فقرة جديدة',
+                content: '',
+                isRemovable: true
+            });
+            renderManualEditor();
+            setTimeout(() => {
+                const container = document.getElementById('manual-sections-container');
+                container.lastElementChild.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
+        // --- SAVING & LOADING (MANUAL) ---
 
         function getSavedBroadcasts() {
             return JSON.parse(localStorage.getItem('custom_broadcasts')) || {};
@@ -536,12 +560,8 @@
 
             const manualData = {
                 name: name,
-                introConclusion: manualIntroConclusionInput.value,
-                quran: manualQuranInput.value,
-                hadith: manualHadithInput.value,
-                didYouKnow: manualDidYouKnowInput.value,
-                wisdom: manualWisdomInput.value,
-                morningWord: manualMorningWordInput.value,
+                type: 'dynamic', 
+                sections: currentManualSections
             };
 
             let saved = getSavedBroadcasts();
@@ -549,10 +569,10 @@
             localStorage.setItem('custom_broadcasts', JSON.stringify(saved));
             
             populateSavedBroadcasts();
-            savedBroadcastsSelect.value = name; // Select the newly saved item
+            savedBroadcastsSelect.value = name;
             displayManualBroadcast(manualData);
         }
-        
+
         function loadManualBroadcast() {
             const name = savedBroadcastsSelect.value;
             if (!name) return;
@@ -562,12 +582,21 @@
 
             if (data) {
                 manualBroadcastNameInput.value = data.name || '';
-                manualIntroConclusionInput.value = data.introConclusion || '';
-                manualQuranInput.value = data.quran || '';
-                manualHadithInput.value = data.hadith || '';
-                manualDidYouKnowInput.value = data.didYouKnow || '';
-                manualWisdomInput.value = data.wisdom || '';
-                manualMorningWordInput.value = data.morningWord || '';
+                
+                if (data.type === 'dynamic' && data.sections) {
+                    currentManualSections = data.sections;
+                } else {
+                    // Backward compatibility
+                    currentManualSections = [
+                        { id: 'sec-intro', title: 'المقدمة والخاتمة', content: data.introConclusion || '', isRemovable: false },
+                        { id: 'sec-quran', title: 'القرآن الكريم', content: data.quran || '', isRemovable: true },
+                        { id: 'sec-hadith', title: 'الحديث الشريف', content: data.hadith || '', isRemovable: true },
+                        { id: 'sec-didyouknow', title: 'فقرة هل تعلم', content: data.didYouKnow || '', isRemovable: true },
+                        { id: 'sec-wisdom', title: 'فقرة حكمة اليوم', content: data.wisdom || '', isRemovable: true },
+                        { id: 'sec-word', title: 'فقرة كلمة الصباح', content: data.morningWord || '', isRemovable: true }
+                    ];
+                }
+                renderManualEditor();
                 displayManualBroadcast(data);
             }
         }
@@ -575,48 +604,51 @@
         function deleteManualBroadcast() {
             const name = savedBroadcastsSelect.value;
             if (!name) return;
-
-            if (confirm(`هل أنت متأكد من حذف إذاعة "${name}"؟ لا يمكن التراجع عن هذا الإجراء.`)) {
+            if (confirm(`هل أنت متأكد من حذف إذاعة "${name}"؟`)) {
                 let saved = getSavedBroadcasts();
                 delete saved[name];
                 localStorage.setItem('custom_broadcasts', JSON.stringify(saved));
                 
-                // Clear form and display
-                document.querySelectorAll('#manual-controls textarea, #manual-controls input').forEach(el => el.value = '');
+                manualBroadcastNameInput.value = '';
+                currentManualSections = JSON.parse(JSON.stringify(defaultManualSections));
+                renderManualEditor();
                 broadcastTitle.textContent = 'إنشاء إذاعة يدوية';
-                broadcastContent.innerHTML = '<p class="text-center text-gray-500">املأ الحقول أعلاه أو قم بتحميل إذاعة محفوظة.</p>';
+                broadcastContent.innerHTML = '<p class="text-center text-gray-500">املأ الحقول أعلاه.</p>';
                 
                 populateSavedBroadcasts();
             }
         }
-        
-        function displayManualBroadcast(data) {
-            currentManualBroadcast = data; // Store for printing
-            broadcastTitle.textContent = data.name;
 
+        function displayManualBroadcast(data) {
+            let sectionsToRender = [];
+            if (data.type === 'dynamic') {
+                sectionsToRender = data.sections;
+            } else {
+                 sectionsToRender = currentManualSections; 
+            }
+
+            broadcastTitle.textContent = data.name || manualBroadcastNameInput.value || 'إذاعة يدوية';
+            
             const dateValue = dateInput.value ? new Date(dateInput.value) : new Date();
-            const userTimezoneOffset = dateValue.getTimezoneOffset() * 60000;
-            const adjustedDate = new Date(dateValue.getTime() + userTimezoneOffset);
             const hijriDate = new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura', {
                 weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-            }).format(adjustedDate);
+            }).format(dateValue);
             broadcastDateDisplay.textContent = hijriDate;
 
-             const paragraphs = [
-                { title: 'المقدمة والخاتمة', content: `<p>${data.introConclusion.replace(/\n/g, '<br>')}</p>`},
-                { title: 'فقرة القرآن الكريم', content: `<p>${data.quran.replace(/\n/g, '<br>')}</p>` },
-                { title: 'فقرة الحديث الشريف', content: `<p>${data.hadith.replace(/\n/g, '<br>')}</p>` },
-                { title: 'فقرة هل تعلم', content: `<p>${data.didYouKnow.replace(/\n/g, '<br>')}</p>` },
-                { title: 'فقرة حكمة اليوم', content: `<p>${data.wisdom.replace(/\n/g, '<br>')}</p>` },
-                { title: 'فقرة كلمة الصباح', content: `<p>${data.morningWord.replace(/\n/g, '<br>')}</p>` }
-            ];
+            const contentHTML = sectionsToRender.map((section, index) => {
+                if (!section.content.trim()) return '';
+                const colors = ['#264653', '#2a9d8e', '#347f98', '#af9d72', '#d48647', '#cc6146'];
+                return `
+                    <div class="broadcast-card glass-container" style="border-right-color: ${colors[index % colors.length]};">
+                        <h3>${section.title}</h3>
+                        <p>${section.content.replace(/\n/g, '<br>')}</p>
+                    </div>`;
+            }).join('');
 
-            renderBroadcastContent(paragraphs);
+            broadcastContent.innerHTML = contentHTML || '<p class="text-center text-gray-500">لا يوجد محتوى لعرضه حاليًا.</p>';
         }
 
-
-        // --- GENERAL & UTILITY FUNCTIONS ---
-        
+        // --- SHARED DISPLAY ---
         function renderBroadcastContent(paragraphs) {
             const colors = ['#264653', '#2a9d8e', '#347f98', '#af9d72', '#d48647', '#cc6146'];
             let contentHTML = '';
@@ -634,15 +666,55 @@
             broadcastContent.innerHTML = contentHTML || '<p class="text-center text-gray-500">لا يوجد محتوى لعرضه حاليًا.</p>';
         }
 
+        // --- NAMES MODAL LOGIC (DYNAMIC) ---
+        
+        function openModal() {
+            const container = document.getElementById('dynamic-names-container');
+            container.innerHTML = ''; 
 
+            // Presenter is always needed
+            addNameField(container, 'presenter', 'مقدم الإذاعة');
+
+            if (currentMode === 'automatic') {
+                addNameField(container, 'quran', 'فقرة القرآن الكريم');
+                addNameField(container, 'hadith', 'فقرة الحديث الشريف');
+                addNameField(container, 'morningWord', 'فقرة كلمة الصباح');
+                addNameField(container, 'didYouKnow', 'فقرة هل تعلم');
+                addNameField(container, 'wisdom', 'فقرة حكمة اليوم');
+            } else {
+                // Manual Mode: Loop through sections
+                currentManualSections.forEach(section => {
+                    // Skip Intro/Conclusion for specific assignment usually
+                    if (!section.title.includes('المقدمة')) {
+                         addNameField(container, section.id, `فقرة: ${section.title}`);
+                    }
+                });
+            }
+
+            namesModal.classList.remove('opacity-0', 'pointer-events-none');
+            namesModal.querySelector('div').classList.remove('scale-95');
+        }
+
+        function addNameField(container, id, labelText) {
+            const div = document.createElement('div');
+            const val = studentNames[id] || '';
+            div.innerHTML = `
+                <label class="block text-sm font-medium text-gray-700">${labelText}</label>
+                <input type="text" data-id="${id}" value="${val}" class="name-input mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            `;
+            container.appendChild(div);
+        }
+
+        function closeModal() {
+            namesModal.classList.add('opacity-0', 'pointer-events-none');
+            namesModal.querySelector('div').classList.add('scale-95');
+        }
+
+        // --- PRINT LOGIC ---
         function handlePrint() {
             const supervisorName = supervisorInput.value || 'غير محدد';
             const printWindow = window.open('', '_blank');
-            
-            if (!printWindow) {
-                 alert("يرجى السماح بالنوافذ المنبثقة لهذا الموقع لإتمام عملية الطباعة.");
-                return;
-            }
+            if (!printWindow) { alert("يرجى السماح بالنوافذ المنبثقة."); return; }
             
             let page1Content = '', page2Content = '';
             const colors = ['#264653', '#2a9d8e', '#347f98', '#af9d72', '#d48647', '#cc6146'];
@@ -668,29 +740,32 @@
                 ];
                 page2Content = page2Paragraphs.map((item, index) => `<div class="print-item broadcast-card" style="border-right: 8px solid ${colors[(index + 1) % colors.length]}; padding-right: 2.5rem;"><h3>${item.title}</h3><p>${item.content}</p></div>`).join('');
 
-            } else { // Manual mode
-                const data = currentManualBroadcast;
-                if(!data || !data.name) {
-                    alert('لا توجد بيانات إذاعة يدوية لعرضها. يرجى حفظ إذاعة أولاً.');
-                    printWindow.close();
-                    return;
-                }
-                
-                page1Content = `<div class="print-item broadcast-card" style="border-right: 8px solid ${colors[0]}; padding-right: 2.5rem;"><h3>المقدمة والخاتمة</h3><p>${data.introConclusion.replace(/\n/g, '<br>')}</p><p class="supervisor">إشراف الأستاذ/ة: ${supervisorName}</p></div>`;
+            } else { 
+                // MANUAL MODE (DYNAMIC) PRINT LOGIC
+                let page1HTML = '';
+                let page2HTML = '';
 
-                const page2Paragraphs = [
-                    { title: 'فقرة القرآن الكريم', content: data.quran },
-                    { title: 'فقرة الحديث الشريف', content: data.hadith },
-                    { title: 'فقرة هل تعلم', content: data.didYouKnow },
-                    { title: 'فقرة حكمة اليوم', content: data.wisdom },
-                    { title: 'فقرة كلمة الصباح', content: data.morningWord }
-                ];
-                page2Content = page2Paragraphs.map((item, index) => {
-                    if (!item.content.trim()) return '';
-                    return `<div class="print-item broadcast-card" style="border-right: 8px solid ${colors[(index + 1) % colors.length]}; padding-right: 2.5rem;"><h3>${item.title}</h3><p>${item.content.replace(/\n/g, '<br>')}</p></div>`
-                }).join('');
+                currentManualSections.forEach((section, index) => {
+                    // Add student name if exists for this section ID
+                    const sName = studentNames[section.id] ? `<br><span class="student-name text-sm">تقديم الطالب/ـة: ${studentNames[section.id]}</span>` : '';
+                    const cardHTML = `
+                        <div class="print-item broadcast-card" style="border-right: 8px solid ${colors[index % colors.length]}; padding-right: 2.5rem;">
+                            <h3>${section.title}</h3>
+                            <p>${section.content.replace(/\n/g, '<br>')}</p>
+                            ${sName}
+                            ${index === 0 ? `<p class="supervisor">إشراف الأستاذ/ة: ${supervisorName}</p>` : ''}
+                        </div>
+                    `;
+
+                    if (index === 0) {
+                        page1HTML += cardHTML; // First item (Intro) on page 1
+                    } else {
+                        page2HTML += cardHTML; // Rest on page 2
+                    }
+                });
+                page1Content = page1HTML;
+                page2Content = page2HTML;
             }
-
 
             const printTemplate = `
                 <html>
@@ -730,62 +805,54 @@
             
             printWindow.document.write(printTemplate);
             printWindow.document.close();
-            printWindow.focus();
-            setTimeout(() => {
-                printWindow.print();
-                printWindow.close();
-            }, 250);
-        }
-
-        function openModal() {
-            namePresenterInput.value = studentNames.presenter;
-            nameQuranInput.value = studentNames.quran;
-            nameHadithInput.value = studentNames.hadith;
-            nameMorningWordInput.value = studentNames.morningWord;
-            nameDidYouKnowInput.value = studentNames.didYouKnow;
-            nameWisdomInput.value = studentNames.wisdom;
-            namesModal.classList.remove('opacity-0', 'pointer-events-none');
-            namesModal.querySelector('div').classList.remove('scale-95');
-        }
-
-        function closeModal() {
-            namesModal.classList.add('opacity-0', 'pointer-events-none');
-            namesModal.querySelector('div').classList.add('scale-95');
+            setTimeout(() => { printWindow.print(); printWindow.close(); }, 250);
         }
 
         // --- EVENT LISTENERS ---
-        // Automatic Mode
+        document.addEventListener('DOMContentLoaded', () => {
+            const pledgeModal = document.getElementById('pledge-modal');
+            const agreeButton = document.getElementById('agree-button');
+            const mainApp = document.getElementById('main-app');
+
+            agreeButton.addEventListener('click', () => {
+                pledgeModal.classList.add('hidden');
+                mainApp.classList.remove('hidden');
+            });
+
+            populateSelectors();
+            setInitialDate();
+            displayAutomaticBroadcast();
+            populateSavedBroadcasts();
+
+            // Additional listener for the Add Section button
+            document.getElementById('add-new-section-btn').addEventListener('click', addNewSection);
+        });
+
         genderSelect.addEventListener('change', displayAutomaticBroadcast);
         topicSelect.addEventListener('change', displayAutomaticBroadcast);
         
-        // Manual Mode
         saveManualBtn.addEventListener('click', saveManualBroadcast);
         loadManualBtn.addEventListener('click', loadManualBroadcast);
         deleteManualBtn.addEventListener('click', deleteManualBroadcast);
 
-        // General
         dateInput.addEventListener('change', () => {
             if (currentMode === 'automatic') displayAutomaticBroadcast();
-            else if (currentManualBroadcast.name) displayManualBroadcast(currentManualBroadcast);
+            else displayManualBroadcast({ type: 'dynamic', sections: currentManualSections });
         });
+
         printButton.addEventListener('click', handlePrint);
         addNamesButton.addEventListener('click', openModal);
         closeModalButton.addEventListener('click', closeModal);
+        
         saveNamesButton.addEventListener('click', () => {
-            studentNames.presenter = namePresenterInput.value;
-            studentNames.quran = nameQuranInput.value;
-            studentNames.hadith = nameHadithInput.value;
-            studentNames.morningWord = nameMorningWordInput.value;
-            studentNames.didYouKnow = nameDidYouKnowInput.value;
-            studentNames.wisdom = nameWisdomInput.value;
+            const inputs = document.querySelectorAll('.name-input');
+            inputs.forEach(input => {
+                studentNames[input.dataset.id] = input.value;
+            });
             closeModal();
-            if (currentMode === 'automatic') {
-                displayAutomaticBroadcast();
-            }
-            // Note: Student names are not auto-applied to manual broadcasts as the structure is free-form.
+            if (currentMode === 'automatic') displayAutomaticBroadcast();
         });
         
-        // Mode Switching
         automaticModeBtn.addEventListener('click', () => {
             currentMode = 'automatic';
             manualControls.classList.add('hidden');
@@ -801,32 +868,16 @@
             manualControls.classList.remove('hidden');
             automaticModeBtn.classList.remove('active');
             manualModeBtn.classList.add('active');
-            if (currentManualBroadcast.name) {
-                 displayManualBroadcast(currentManualBroadcast);
+            
+            initManualEditor();
+            if (manualBroadcastNameInput.value) {
+                displayManualBroadcast({ type: 'dynamic', sections: currentManualSections });
             } else {
                 broadcastTitle.textContent = 'إنشاء إذاعة يدوية';
                 broadcastContent.innerHTML = '<p class="text-center text-gray-500">املأ الحقول أعلاه أو قم بتحميل إذاعة محفوظة.</p>';
             }
         });
 
-
-        // --- INITIALIZATION ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const pledgeModal = document.getElementById('pledge-modal');
-            const agreeButton = document.getElementById('agree-button');
-            const mainApp = document.getElementById('main-app');
-
-            agreeButton.addEventListener('click', () => {
-                pledgeModal.classList.add('hidden');
-                mainApp.classList.remove('hidden');
-            });
-
-            populateSelectors();
-            setInitialDate();
-            displayAutomaticBroadcast();
-            populateSavedBroadcasts();
-        });
     </script>
 </body>
 </html>
-
